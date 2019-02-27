@@ -7,5 +7,5 @@ Alvaro Mateos de Arriba Gaallego ---> @mateos14
 Nombres, apellidos, y usuario GitHub de los integrantes del equipo.
 
 ## Objetivos del trabajo
-hace
+hacer algo productivo 
 Lista de los objetivos que se persiguen con el trabajo propuesto.
