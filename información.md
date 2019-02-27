@@ -8,8 +8,9 @@ Alvaro Mateos de Arriba Gallego ---> @mateos14
 
 
 
-
 Tomás Llano Miró - @tllanomiro
+
+
 Nombres, apellidos, y usuario GitHub de los integrantes del equipo.
 
 ## Objetivos del trabajo
