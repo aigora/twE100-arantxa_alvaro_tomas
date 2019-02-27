@@ -11,8 +11,6 @@ Tomás Llano Miró - @tllanomiro
 
 Arantxa González Urcelay- @arantxagonzalez
 
-Nombres, apellidos, y usuario GitHub de los integrantes del equipo.
-
 ## Objetivos del trabajo
 
 aprobar
