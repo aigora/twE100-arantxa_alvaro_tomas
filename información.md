@@ -10,6 +10,7 @@ Alvaro Mateos de Arriba Gallego ---> @mateos14
 
 Tomás Llano Miró - @tllanomiro
 
+Arantxa González Urcelay- @arantxagonzalez
 
 Nombres, apellidos, y usuario GitHub de los integrantes del equipo.
 
