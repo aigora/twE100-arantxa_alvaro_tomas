@@ -5,11 +5,11 @@ Oscar, Antonio, la chavala que se supone que nos lo enseñó, ayuda
 [Descripción breve del proyecto a realizar (2-3 frases)]
 
 ## Integrantes del equipo
-Alvaro Mateos de Arriba Gallego ---> @mateos14
+Alvaro Mateos de Arriba Gallego - @mateos14
 
 Tomás Llano Miró - @tllanomiro
 
-Arantxa González Urcelay- @arantxagonzalez
+Arantxa González Urcelay - @arantxagonzalez
 
 ## Objetivos del trabajo
 
