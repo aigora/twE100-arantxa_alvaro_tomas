@@ -1,5 +1,7 @@
 # No sabemos cambiar el nombre del repositorio, help
 
+Oscar, Antonio, la chavala que se supone que nos lo enseñó, ayuda
+
 Descripción breve del proyecto a realizar (2-3 frases).
 
 ## Integrantes del equipo
