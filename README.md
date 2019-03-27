@@ -1,8 +1,6 @@
-# No sabemos cambiar el nombre del repositorio, help
+# Mercado
 
-Oscar, Antonio, la chavala que se supone que nos lo enseñó, ayuda
-
-[Descripción breve del proyecto a realizar (2-3 frases)]
+Haremos un mercado donde se ofrecerán ciertos productos con diferentes características. Con un registro de clientes, descuentos...
 
 ## Integrantes del equipo
 Alvaro Mateos de Arriba Gallego - @mateos14
