@@ -1,0 +1,375 @@
+#include <stdio.h>
+#include <string.h>
+
+void lista_articulos();//muestra los diferentes articulos que aparecen en la página web
+struct lista_articulos 
+{
+	char tipos_articulos[20];
+};
+
+void menu_subcategorias_sillas();//muestra los diferentes tipos de sillas
+
+struct menu_silla{
+	char tipo_silla[20];
+};
+void menu_subcategorias_camas();//muestra los diferentes tipos de camas
+
+void menu_subcategorias_mesas();//muestra los diferentes tipos de mesas
+struct menu_mesas{
+	char tipo_mesa[20];
+};
+void menu_subcategorias_armario();//muestra los diferentes tipos de armarios
+struct menu_armario{
+	char tipo_armario[20];
+};
+void menu_subcategorias_libreria();//muestra los diferentes tipos de librerias
+struct menu_libreria{
+	char tipo_libreria[20];
+};
+void menu_subcategorias_sofa();//muestra los diferentes tipos de sofas
+struct menu_sofa{
+	char tipo_sofa[20];
+};
+
+
+void menu_color();//muestra los colores con los que se pueden fabricar los muebles
+struct lista_color{
+	char tipo_color[20];
+};
+
+
+int main() {
+lista_articulos();
+int opcion;
+scanf("%d",&opcion);
+switch(opcion){
+	
+    case 1:
+        printf("Usted ha seleccionado Sillas \n");
+        printf("\nSeleccione el tipo de silla: \n");
+        menu_subcategorias_sillas();
+        break;
+    case 2:
+        printf("Usted ha seleccionado Camas \n");
+        menu_subcategorias_camas();
+        break;
+    case 3:
+        printf("Usted ha seleccionado Mesas\n");
+        printf("\nSeleccione el tipo de Mesa: \n");
+        menu_subcategorias_mesas();
+
+        break;
+    case 4:
+        printf("Usted ha seleccionado Armarios \n");
+        printf("\nSeleccione el tipo de Armario: \n");
+        menu_subcategorias_armario();
+        
+        break;
+    case 5:
+        printf("Usted ha seleccionado Librerias \n");
+        printf("\nSeleccione el tipo de Libreria: \n");
+        menu_subcategorias_libreria();
+        break;
+    case 6:
+        printf("Usted ha seleccionado Sofas \n");
+        printf("\nSeleccione el tipo de Sofa: \n");
+        menu_subcategorias_sofa();
+        break;
+
+    default:
+
+		printf("El articulo seleccionado no se encuentra en ninguna de nuestras categorias. \n");   
+}
+    menu_color();
+}
+
+    void lista_articulos(){//muestra los diferentes articulos que aparecen en la página web
+	struct lista_articulos categorias[6]={
+    {"Sillas"},{"Camas"},{"Mesas"},{"Armarios"},{"Librerias"},{"Sofas"}};
+    printf("Las categorias que puede encontrar las siguientes: \n");
+    for(int i=0;i<6;i++)
+    {
+    printf("%d----%s \n",i+1,categorias[i].tipos_articulos);
+	}
+}
+
+	
+	void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
+	struct menu_silla sillas[4]={
+    {"Taburete"},{"Silla de jardin"},{"Silla de oficina"},{"Silla de cocina"}};
+    for(int i=0;i<4;i++)
+    {
+    	printf("%d----%s \n",i+1,sillas[i].tipo_silla);
+	}
+	int opcion;
+	scanf("%d",&opcion);
+	int num_tabmax=30;
+	int num_sillas_jardinmax=30;
+	int num_sillas_oficinamax=30;
+	int num_sillas_cocinamax=30;
+	switch(opcion){
+		case 1:
+			printf("Cuantos taburates deseas? \n");
+			int num_taburetes;
+			scanf("%d",&num_taburetes);
+			if(num_taburetes<=num_tabmax)
+			{
+			printf("\n Usted ha elegido %d taburetes \n",num_taburetes);
+			num_tabmax=num_tabmax-num_taburetes;
+			}
+			else
+			{
+			printf("No poseemos esta cantidad en stock, el numero maximo de taburetes del que disponemos es de %d \n",num_tabmax);
+			printf("Cuantos taburates deseas? \n");
+			scanf("%d",&num_taburetes);
+			}
+			break;
+			
+		case 2:
+			printf("Cuantas sillas de jardin deseas? \n");
+			int num_sillas_jardin;
+			scanf("%d",&num_sillas_jardin);
+			if(num_sillas_jardin<=num_sillas_jardinmax){
+			printf("\n Usted ha elegido %d sillas de jardin \n",num_sillas_jardin);
+			num_sillas_jardinmax=num_sillas_jardinmax-num_sillas_jardin;}
+			else{
+			printf("No poseemos esta cantidad en stock, el numero maximo de sillas de jardin del que disponemos es de %d \n",num_sillas_jardinmax);
+			printf("Cuantas sillas de jardin deseas? \n");
+			scanf("%d",&num_sillas_jardin);
+			}
+			break;
+		case 3:
+			int num_sillas_oficina;
+			printf("Cuantas sillas de oficina deseas? \n");
+			scanf("%d",&num_sillas_oficina);
+			if(num_sillas_oficina<=num_sillas_oficinamax){
+			printf("\n Usted ha elegido %d sillas de oficina \n",num_sillas_oficina);
+			num_sillas_oficinamax=num_sillas_oficinamax-num_sillas_oficinamax;
+			}
+			else{
+			printf("No poseemos esta cantidad en stock, el numero maximo de sillas de oficina el que disponemos es de %d \n",num_sillas_oficinamax);
+			printf("Cuantas sillas de oficina deseas? \n");
+			scanf("%d",&num_sillas_oficina);
+			}
+			break;
+		case 4:
+			printf("Cuantas sillas de cocina deseas? \n");
+			int num_sillas_cocina;
+			scanf("%d",&num_sillas_cocina);
+			if(num_sillas_cocina<=num_sillas_cocinamax){
+			printf("\n Usted ha elegido %d silas de cocina \n",num_sillas_cocina);
+			num_sillas_cocinamax=num_sillas_cocinamax-num_sillas_cocina;
+		}
+		else{
+		printf("No poseemos esta cantidad en stock, el numero maximo de sillas de cocina del que disponemos es de %d \n",num_sillas_cocinamax);
+		printf("Cuantas sillas de cocina deseas? \n");
+		scanf("%d",&num_sillas_cocina);
+		}
+			break;
+		    default: 
+		    printf("Usted ha elegido una categoria que no se encuentre disponible \n");
+		    break;	
+			}
+		}
+			
+	void menu_subcategorias_camas(){//muestra los diferentes tipos de camas
+		printf("Cuantas camas deseas? \n");
+		int num_camamax;
+		int num_cama;
+		scanf("%d",&num_cama);
+		if(num_cama<=num_camamax){
+		printf("\n Usted ha elegido %d camas\n",num_cama);
+		num_camamax=num_camamax-num_cama;
+	}
+	else{
+		printf("No poseemos esta cantidad en stock, el numero maximo de camas que disponemos es de %d \n",num_camamax);
+			printf("Cuantas camas deseas? \n");
+			scanf("%d",&num_cama);	
+	}
+	}
+
+
+void menu_subcategorias_mesas(){//muestra los diferentes tipos de mesas
+	struct menu_mesas mesas[3]={
+    {"Mesa escritorio"},{"Mesa de comedor"},{"Mesita de noche"}};
+    for(int i=0;i<3;i++)
+    {
+    	printf("%d----%s \n",i+1,mesas[i].tipo_mesa);
+	}
+	int opcion;
+	scanf("%d",&opcion);
+	int num_mesa_escritoriomax=30;
+	int num_mesa_comedormax=30;
+	int num_mesita_nochemax=30;
+	switch(opcion){
+		case 1:
+			printf("Cuantos mesas de escritorio deseas? \n");
+			int num_mesa_escritorio;
+			scanf("%d",&num_mesa_escritorio);
+			if(num_mesa_escritorio<=num_mesa_escritoriomax){
+			printf("\n Usted ha elegido %d mesas de escritorio \n",num_mesa_escritorio);
+			num_mesa_escritoriomax=num_mesa_escritoriomax-num_mesa_escritorio;
+		    }
+		    else{
+			printf("No poseemos esta cantidad en stock, el numero maximo de mesas de escritorio  que disponemos es de %d \n",num_mesa_escritoriomax);
+			printf("Cuantas mesas de escritorio deseas? \n");
+			scanf("%d",&num_mesa_escritorio);
+	        }
+			break;
+		case 2:
+			printf("Cuantas mesas de comedor deseas? \n");
+			int num_mesa_comedor;
+			scanf("%d",&num_mesa_comedor);
+			if(num_mesa_comedor<=num_mesa_comedormax){
+			printf("\n Usted ha elegido %d mesas de comedor \n",num_mesa_comedor);
+			num_mesa_comedormax=num_mesa_comedormax-num_mesa_comedor;}
+		    else{
+	   		printf("No poseemos esta cantidad en stock, el numero maximo de mesas de comedor  que disponemos es de %d \n",num_mesa_comedormax);
+			printf("Cuantas mesas de comedor deseas? \n");
+			scanf("%d",&num_mesa_comedor);}
+			break;
+		case 3:
+			printf("Cuantas mesitas de noche deseas? \n");
+			int num_mesita_noche;
+			scanf("%d",&num_mesita_noche);
+			if(num_mesita_noche<=num_mesita_nochemax){
+			printf("\n Usted ha elegido %d sillas de oficina \n",num_mesita_noche);
+			num_mesita_nochemax=num_mesita_nochemax-num_mesita_noche;}
+			else{
+			printf("No poseemos esta cantidad en stock, el numero maximo de mesasita de noche  que disponemos es de %d \n",num_mesita_nochemax);
+			printf("Cuantas mesitas de noches deseas? \n");
+			scanf("%d",&num_mesita_noche);}
+			break;
+	        default: 
+		    printf("Usted ha elegido un tipo de mesa que no se encuentre disponible \n");
+		    break;
+}
+}
+
+    void menu_subcategorias_armario(){//muestra los diferentes tipos de armarios
+	struct menu_armario armario[2]={
+    {"Armario ropero"},{"Armario cocina"}};
+    for(int i=0;i<2;i++)
+    {
+    	printf("%d----%s \n",i+1,armario[i].tipo_armario);
+	}
+	int opcion;
+	scanf("%d",&opcion);
+	int num_arm_roperomax;
+	int num_arm_cocinamax;
+	switch(opcion){
+		case 1:
+			printf("Cuantos Armarios roperos deseas? \n");
+			int num_arm_ropero;
+			scanf("%d",&num_arm_ropero);
+			if(num_arm_ropero<=num_arm_roperomax){
+			printf("\n Usted ha elegido %d armarios roperos \n",num_arm_ropero);
+			num_arm_roperomax=num_arm_roperomax-num_arm_roperomax;}
+			else{
+			printf("No poseemos esta cantidad en stock, el numero maximo de armarios roperos  que disponemos es de %d \n",num_arm_roperomax);
+			printf("Cuantos armarios roperos deseas? \n");
+			scanf("%d",&num_arm_roperomax);
+			}
+			break;
+		case 2:
+			printf("Cuantos armarios de cocina deseas? \n");
+			int num_arm_cocina;
+			scanf("%d",&num_arm_cocina);
+			if(num_arm_ropero<=num_arm_cocinamax){
+			printf("\n Usted ha elegido %d armarios roperos \n",num_arm_cocina);
+			num_arm_cocinamax=num_arm_cocinamax-num_arm_cocina;}
+			else{
+			printf("No poseemos esta cantidad en stock, el numero maximo de armarios de cocina  que disponemos es de %d \n",num_arm_cocinamax);
+			printf("Cuantos armarios de cocina deseas? \n");
+			scanf("%d",&num_arm_cocinamax);
+			}
+				
+}
+}
+
+void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
+	struct menu_libreria libreria[2]={
+    {"libreria-estanteria"},{"libreria billy"}};
+    for(int i=0;i<2;i++)
+    {
+    	printf("%d----%s \n",i+1,libreria[i].tipo_libreria);
+	}
+	int opcion;
+		scanf("%d",&opcion);
+	switch(opcion){
+		case 1:
+		printf("Cuantas librerias-estanterias deseas? \n");
+		int num_libreria_estanteria;
+		scanf("%d",&num_libreria_estanteria);
+		printf("\n Usted ha elegido %d armarios roperos \n",num_libreria_estanteria);
+		break;
+		case 2:
+		printf("Cuantas librerias billy deseas? \n");
+		int num_libreria_billy;
+		scanf("%d",&num_libreria_billy);
+		printf("\n Usted ha elegido %d librerias \n",num_libreria_billy);
+		break;
+		default:
+		printf("Usted ha elegido un tipo de libreria que no se encuentra disponible \n");
+		break;		
+}
+}
+void menu_subcategorias_sofa(){//muestra los diferentes tipos de sofas
+	struct menu_sofa sofa[3]={
+    {"sofa chester"},{"sofa chaise longue"},{"sofa cama"}};
+    for(int i=0;i<3;i++)
+    {
+    	printf("%d----%s \n",i+1,sofa[i].tipo_sofa);
+	}
+	int opcion;
+		scanf("%d",&opcion);
+	switch(opcion){
+		case 1:
+		printf("Cuantos sofas chester deseas? \n");
+		int num_sofa_chester;
+		scanf("%d",&num_sofa_chester);
+		printf("\n Usted ha elegido %d sofa chester \n",num_sofa_chester);
+		break;
+		case 2:
+		printf("Cuantos sofas del tipo chaise longue deseas? \n");
+		int num_sofa_chaise;
+		scanf("%d",&num_sofa_chaise);
+		printf("\n Usted ha elegido %d sofa chaise long \n",num_sofa_chaise);
+		break;
+		case 3:
+		printf("Cuantos sofas cama deseas? \n");
+		int num_sofa_cama;
+		scanf("%d",&num_sofa_cama);
+		printf("\n Usted ha elegido %d sofa cama \n",num_sofa_cama);
+		break;
+		default:
+		printf("Usted ha elegido un tipo de sofa que no se encuentra entre los disponible \n");
+		break;	
+}
+}
+
+void menu_color(){//muestra los colores con los que se pueden fabricar los muebles
+	struct lista_color color[3]={
+	{"negro"},{"teka"},{"blanco"}};
+	printf("Elija uno de los siguientes colores: \n");
+	for(int i=0;i<3;i++)
+	{
+	printf("%d----%s \n",i+1,color[i].tipo_color);	
+	}
+	int opcion;
+		scanf("%d",&opcion);
+	switch(opcion){
+		case 1:
+		printf("Usted ha seleccionado el color negro \n");
+		break;
+		case 2:
+		printf("Usted ha seleccionado el color teka \n");
+		break;
+		case 3:
+		printf("Usted ha seleccionado el color blanco \n");
+        break;
+        default:
+        printf("Este color no se encuentra disponible \n");
+        break;	
+}
+}
