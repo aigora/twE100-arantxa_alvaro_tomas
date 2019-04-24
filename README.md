@@ -1,4 +1,4 @@
-#Información
+Información:
 
 El primer fichero subido es el de nombre trabajo 3.0.cpp, después se subió un fichero a parte llamado trabajo remodelado.cpp, TFG.cpp es una mínima modificación del primer fichero y, finalmente, el trabajo a entregar se titula trabajo.c.
 
