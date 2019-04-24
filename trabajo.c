@@ -16,7 +16,7 @@ struct lista_articulos
 void menu_subcategorias_sillas();//muestra los diferentes tipos de sillas
 struct menu_silla{
 	char tipo_silla[20];
-	int precio;
+	float precio;
 };
 
 //Funcion camas
@@ -26,28 +26,28 @@ void menu_subcategorias_camas();//muestra los diferentes tipos de camas
 void menu_subcategorias_mesas();//muestra los diferentes tipos de mesas
 struct menu_mesas{
 	char tipo_mesa[20];
-	int precio;
+	float precio;
 };
 
 //Funcion armarios
 void menu_subcategorias_armario();//muestra los diferentes tipos de armarios
 struct menu_armario{
 	char tipo_armario[20];
-	int precio;
+	float precio;
 };
 
 //Funcion librerias
 void menu_subcategorias_libreria();//muestra los diferentes tipos de librerias
 struct menu_libreria{
 	char tipo_libreria[20];
-	int precio;
+	float precio;
 };
 
 //Funcion sofas
 void menu_subcategorias_sofa();//muestra los diferentes tipos de sofas
 struct menu_sofa{
 	char tipo_sofa[20];
-	int precio;
+	float precio;
 };
 
 //Funcion color
@@ -118,7 +118,16 @@ switch (menu){
 
 //Opcion de compra
 case 1:	
-
+	do {
+		
+		printf(" De cu\240nto dinero dispone(\44)?:  ");
+		scanf("%f", &dinero);
+		fflush(stdin);
+		num=dinero/dinero;
+		if(dinero < 0){
+			printf("En n\243meros rojos te ser\240 dif\241cil comprar nada.");
+			}
+	} while (num != 1);
 
 	
 //Variables 
@@ -136,16 +145,7 @@ char rep;
 		fclose(ticket);
 do	{
 
-	do {
-		
-		printf(" De cu\240nto dinero dispone?:  ");
-		scanf("%f", &dinero);
-		fflush(stdin);
-		num=dinero/dinero;
-		if(dinero < 0){
-			printf("En n\243meros rojos te ser\240 dif\241cil comprar nada.");
-			}
-	} while (num != 1);
+
 	
 lista_articulos();
 printf("\n\n Qu\202 desea comprar?:  ");
@@ -199,8 +199,14 @@ printf("\n\n====================================================================
 }while(rep=='s'||rep=='S');
    // menu_color();
 
+/*
+FILE *ptotal;
+ptotal=fopen("ptotal.txt","r");
 
-
+float pfinal; //precio total
+float pfinalsillas; //precio total sillas
+scanf(ptotal, "%g", &pfinalsillas);
+*/
 
 
 		ticket=fopen("ticket.txt","a");
@@ -216,7 +222,7 @@ printf("\n\n====================================================================
 		
 			srand(time(NULL));
 			referencia=rand () % 10000000000+1;	
-			fprintf(ticket, "\n\n Su c\242digo de factura es %i",referencia);
+			fprintf(ticket, "\n\n Su código de factura es %i",referencia);
 	fclose(ticket);
 	
 	break;
@@ -231,7 +237,15 @@ printf("\n\n Bienvenido al registro de socios \n\n");
 registro_socios();
 
 break;
+
+default:
+	printf(" Por favor, elija un n\243mero de los planteados en pantalla.\n Se le est\240 redirigiendo al men\243 principal.");
+	printf("\n\n========================================================================================================================\n");
+rep_final='s';
+	break;	
+
 }
+
 
 
 
@@ -267,14 +281,14 @@ break;
 void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 
 							struct menu_silla sillas[4]={
-						    {"Taburete",5},{"Silla de jard\241n",8},{"Silla de oficina",32},{"Silla de cocina",25}};
+						    {"Taburete",9},{"Silla de jard\241n",25},{"Silla de oficina",69.99},{"Silla de cocina",29.99}};
 						 
 						
 							//variables	
 							int opcion;
 							int i;
-							int particulo[4];
-							int ptotal_sillas;
+							float particulo[4];
+							float ptotal_sillas;
 							int cantidad_sillas [4];
 							int error;
 							char rep;	
@@ -286,7 +300,7 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 			
 			   for(int i=0;i<4;i++)
 						    {
-						    	printf("%d.   -%s (%i) \n",i+1,sillas[i].tipo_silla,sillas[i].precio);
+						    	printf("%d.   -%s (%g$) \n",i+1,sillas[i].tipo_silla,sillas[i].precio);
 							}
 							
 				printf("\n\n Qu\202 tipo de silla desea?:  ");
@@ -357,14 +371,21 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 						
 						if(cantidad_sillas[i]!=0)	{
 							particulo[i]=cantidad_sillas[i]*sillas[i].precio;
-							printf("\n\n%i unidades de %s .......%i",cantidad_sillas[i],sillas[i].tipo_silla,particulo[i]);
+							printf("\n\n%i unidades de %s ....... %g$",cantidad_sillas[i],sillas[i].tipo_silla,particulo[i]);
 							ptotal_sillas+=particulo[i];
 						}		
 					}
 					
-					printf("%i", ptotal_sillas);
+					printf("\n\nSuma total de la compra: %g$", ptotal_sillas);
 					//return 	ptotal_sillas;		
 						
+/*
+FILE *ptotal;
+ptotal=fopen("ptotal.txt","a");
+fprint(ptotal, "%g",ptotal_sillas);
+fclose(ptotal);
+*/
+
 			//Archivo
 			
 			FILE *ticket;
@@ -374,7 +395,7 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 						
 						if(cantidad_sillas[i]!=0)	{
 							particulo[i]=cantidad_sillas[i]*sillas[i].precio;
-							fprintf(ticket,"\n\n%i unidades de %s .......%i",cantidad_sillas[i],sillas[i].tipo_silla,particulo[i]);
+							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_sillas[i],sillas[i].tipo_silla,particulo[i]);
 							
 						}		
 					}
@@ -392,17 +413,17 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 	void menu_subcategorias_camas(){//muestra los diferentes tipos de camas
 		
 							//variables	
-							int particulo;
-							int ptotal_camas;
+							float particulo;
+							float ptotal_camas;
 							int cantidad_camas ;
 							char rep;	
 							
-							particulo=32;							
+							particulo=139.99;							
 		
 		
 		do{
 		
-		printf("\n\nCu\240ntas camas desea? ");
+		printf("\n\nCu\240ntas camas desea(139.99$ por unidad)? ");
 		scanf("%d",&cantidad_camas) ;
 		fflush(stdin);	
 		
@@ -418,7 +439,7 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 						
 						if(cantidad_camas!=0)	{
 							ptotal_camas=	particulo*cantidad_camas;
-							printf("\n\n%i unidades de camas .......%i",cantidad_camas,ptotal_camas);
+							printf("\n\n%i unidades de camas ....... %g$",cantidad_camas,ptotal_camas);
 							
 							
 					}
@@ -434,7 +455,7 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 						
 						if(cantidad_camas!=0)	{
 							
-							fprintf(ticket,"\n\n%i unidades de camas .......%i",cantidad_camas,ptotal_camas);
+							fprintf(ticket,"\n\n%i unidades de camas ....... %g$",cantidad_camas,ptotal_camas);
 							
 						}		
 					
@@ -454,15 +475,15 @@ void menu_subcategorias_mesas(){//muestra los diferentes tipos de mesas
 
 //Estructura
 	struct menu_mesas mesas[3]={
-    {"Mesa escritorio",30},{"Mesa de comedor",20},{"Mesita de noche",16}};
+    {"Mesa de escritorio",95},{"Mesa de comedor",239.99},{"Mesita de noche",49.99}};
 
 
 							
 							//variables	
 							int opcion;
 							int i;
-							int particulo[3];
-							int ptotal_mesas;
+							float particulo[3];
+							float ptotal_mesas;
 							int cantidad_mesas [3];
 							int error;
 							char rep;	
@@ -474,7 +495,7 @@ do{
 error=0;
 	    for(int i=0;i<3;i++)
    {
-    	printf("\n%d.   -%s (%i)",i+1,mesas[i].tipo_mesa, mesas[i].precio);
+    	printf("\n%d.   -%s (%g)",i+1,mesas[i].tipo_mesa, mesas[i].precio);
 	}
 	
 	printf("\n\n Qu\202 desea comprar?:  ");
@@ -535,23 +556,23 @@ error=0;
 						
 						if(cantidad_mesas[i]!=0)	{
 							particulo[i]=cantidad_mesas[i]*mesas[i].precio;
-							printf("\n\n%i unidades de %s .......%i",cantidad_mesas[i],mesas[i].tipo_mesa,particulo[i]);
+							printf("\n\n%i unidades de %s ....... %g$",cantidad_mesas[i],mesas[i].tipo_mesa,particulo[i]);
 							ptotal_mesas+=particulo[i];
 						}		
 					}
 					
-					printf("%i", ptotal_mesas);			
+					printf("\n\nSuma total de la compra: %g$", ptotal_mesas);			
 						
 			//Archivo
 			
 			FILE *ticket;
 			ticket=fopen("ticket.txt","a");
 			
-					for (i=0;i<4;i++){
+					for (i=0;i<3;i++){
 						
 						if(cantidad_mesas[i]!=0)	{
 							particulo[i]=cantidad_mesas[i]*mesas[i].precio;
-							fprintf(ticket,"\n\n%i unidades de %s .......%i",cantidad_mesas[i],mesas[i].tipo_mesa,particulo[i]);
+							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_mesas[i],mesas[i].tipo_mesa,particulo[i]);
 							
 						}		
 					}
@@ -566,15 +587,15 @@ error=0;
     void menu_subcategorias_armario(){//muestra los diferentes tipos de armarios
     
 	struct menu_armario armario[2]={
-    {"Armario ropero",85},{"Armario cocina",68}};
+    {"Armario ropero",159.99},{"Armario de cocina",89.99}};
     
     
     
 							//variables	
 							int opcion;
 							int i;
-							int particulo[2];
-							int ptotal_armarios;
+							float particulo[2];
+							float ptotal_armarios;
 							int cantidad_armarios [2];
 							int error;
 							char rep;	
@@ -586,7 +607,7 @@ error=0;
   error=0; 
     for(int i=0;i<2;i++)
     {
-    	printf("%d.   -%s(%i)\n",i+1,armario[i].tipo_armario,armario[i].precio);
+    	printf("%d.   -%s(%g$)\n",i+1,armario[i].tipo_armario,armario[i].precio);
 	}
 	printf("\nQu\202 desea?:   ");
 	scanf("%d",&opcion);
@@ -637,12 +658,12 @@ error=0;
 						
 						if(cantidad_armarios[i]!=0)	{
 							particulo[i]=cantidad_armarios[i]*armario[i].precio;
-							printf("\n\n%i unidades de %s .......%i",cantidad_armarios[i],armario[i].tipo_armario,particulo[i]);
+							printf("\n\n%i unidades de %s ....... %g$",cantidad_armarios[i],armario[i].tipo_armario,particulo[i]);
 							ptotal_armarios+=particulo[i];
 						}		
 					}
 					
-					printf("%i", ptotal_armarios);			
+					printf("\n\nSuma total de la compra: %g$", ptotal_armarios);			
 						
 			//Archivo
 			
@@ -653,7 +674,7 @@ error=0;
 						
 						if(cantidad_armarios[i]!=0)	{
 							particulo[i]=cantidad_armarios[i]*armario[i].precio;
-							fprintf(ticket,"\n\n%i unidades de %s .......%i",cantidad_armarios[i],armario[i].tipo_armario,particulo[i]);
+							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_armarios[i],armario[i].tipo_armario,particulo[i]);
 							
 						}		
 					}
@@ -665,13 +686,13 @@ error=0;
 void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 
 	struct menu_libreria libreria[2]={
-    {"Libreria-estanteria"},{"Libreria Billy"}};
+    {"Librer\241-estanter\241a", 79.99},{"Librer\241a Billy", 59.99}};
     
 							//variables	
 							int opcion;
 							int i;
-							int particulo[2];
-							int ptotal_librerias;
+							float particulo[2];
+							float ptotal_librerias;
 							int cantidad_librerias [2];
 							int error;
 							char rep;	
@@ -683,7 +704,7 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
  error=0;   
     for(int i=0;i<2;i++)
     {
-    	printf("\n%d.   -%s(%i)",i+1,libreria[i].tipo_libreria,libreria[i].precio);
+    	printf("\n%d.   -%s(%g$)",i+1,libreria[i].tipo_libreria,libreria[i].precio);
 	}
 	printf("\n\nQu\202 desea?:   ");
 	scanf("%d",&opcion);
@@ -694,7 +715,7 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 			printf("\n\n De qu\202 color desea las librer\241as?");
 			menu_color();	
 						
-			printf("Cu\240ntos armarios roperos desea? ");
+			printf("Cu\240ntas librer\241as-estante\241as desea? ");
 			scanf("%d",&cantidad_librerias [0]);
 			fflush(stdin);			
 			break;
@@ -703,7 +724,7 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 			printf("\n\n De qu\202 color desea las librer\241as?");
 			menu_color();	
 						
-			printf("Cu\240ntos armarios de cocina desea? ");			
+			printf("Cu\240ntas librer\241as Billy desea? ");			
 			scanf("%d",&cantidad_librerias [1]);
 			fflush(stdin);
 			
@@ -731,12 +752,12 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 						
 						if(cantidad_librerias[i]!=0)	{
 							particulo[i]=cantidad_librerias[i]*libreria[i].precio;
-							printf("\n\n%i unidades de %s .......%i",cantidad_librerias[i],libreria[i].tipo_libreria,particulo[i]);
+							printf("\n\n%i unidades de %s ....... %g$",cantidad_librerias[i],libreria[i].tipo_libreria,particulo[i]);
 							ptotal_librerias+=particulo[i];
 						}		
 					}
 					
-					printf("%i", ptotal_librerias);			
+					printf("\n\nSuma total de la compra: %g$", ptotal_librerias);			
 						
 			//Archivo
 			
@@ -747,7 +768,7 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 						
 						if(cantidad_librerias[i]!=0)	{
 							particulo[i]=cantidad_librerias[i]*libreria[i].precio;
-							fprintf(ticket,"\n\n%i unidades de %s .......%i",cantidad_librerias[i],libreria[i].tipo_libreria,particulo[i]);
+							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_librerias[i],libreria[i].tipo_libreria,particulo[i]);
 							
 						}		
 					}
@@ -759,14 +780,14 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 void menu_subcategorias_sofa(){//muestra los diferentes tipos de sofas
 
 	struct menu_sofa sofa[3]={
-    {"Sof\240 Chester",59},{"Sof\240 Chaise longue",47},{"Sof\240 cama",85}};
+    {"Sof\240 Chester",399.99},{"Sof\240 Longue",279.99},{"Sof\240 cama",345}};
     
     
     							//variables	
 							int opcion;
 							int i;
-							int particulo[3];
-							int ptotal_sofas;
+							float particulo[3];
+							float ptotal_sofas;
 							int cantidad_sofas [3];
 							int error;
 							char rep;	
@@ -778,7 +799,7 @@ do{
 error=0;							
     for(int i=0;i<3;i++)
     {
-    	printf("\n%d.   -%s (%i)",i+1,sofa[i].tipo_sofa,sofa[i].precio);
+    	printf("\n%d.   -%s (%g$)",i+1,sofa[i].tipo_sofa,sofa[i].precio);
 	}
 		printf("\n\n Qu\202 desea?:  ");
 		scanf("%d",&opcion);
@@ -789,7 +810,7 @@ error=0;
 			printf("\n\n De qu\202 color desea las sof\240s?");
 			menu_color();
 			
-			printf("\nCu\240ntas mesas de escritorio desea? ");
+			printf("\nCu\240ntos sof\240s Chester desea? ");
 			scanf("%d",&cantidad_sofas [0]);
 			fflush(stdin);
 			
@@ -799,7 +820,7 @@ error=0;
 			printf("\n\n De qu\202 color desea los sof\240s?");
 			menu_color();	
 				
-			printf("\nCu\240ntas mesas de comedor deseas? ");			
+			printf("\nCu\240ntos sof\240s Lounge desea? ");			
 			scanf("%d",&cantidad_sofas [1]);
 			fflush(stdin);
 			
@@ -809,7 +830,7 @@ error=0;
 			printf("\n\n De qu\202 color desea los sof\240s");
 			menu_color();	
 			
-			printf("\n Cu\240ntas mesitas de noche desea? ");
+			printf("\n Cu\240ntos sof\240s cama desea? ");
 			scanf("%d",&cantidad_sofas [2]);
 			fflush(stdin);
 			
@@ -834,16 +855,16 @@ error=0;
 
 					printf("\n========================================================================================================================\n");
 					printf("\n\nUsted ha comprado:   ");
-					for (i=0;i<4;i++){
+					for (i=0;i<3;i++){
 						
 						if(cantidad_sofas[i]!=0)	{
 							particulo[i]=cantidad_sofas[i]*sofa[i].precio;
-							printf("\n\n%i unidades de %s .......%i",cantidad_sofas[i],sofa[i].tipo_sofa,particulo[i]);
+							printf("\n\n%i unidades de %s ....... %g$",cantidad_sofas[i],sofa[i].tipo_sofa,particulo[i]);
 							ptotal_sofas+=particulo[i];
 						}		
 					}
 					
-					printf("%i", ptotal_sofas);			
+					printf("\n\nSuma total de la compra: %g$", ptotal_sofas);			
 						
 			//Archivo
 			
@@ -854,7 +875,7 @@ error=0;
 						
 						if(cantidad_sofas[i]!=0)	{
 							particulo[i]=cantidad_sofas[i]*sofa[i].precio;
-							fprintf(ticket,"\n\n%i unidades de %s .......%i",cantidad_sofas[i],sofa[i].tipo_sofa,particulo[i]);
+							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_sofas[i],sofa[i].tipo_sofa,particulo[i]);
 							
 						}		
 					}
