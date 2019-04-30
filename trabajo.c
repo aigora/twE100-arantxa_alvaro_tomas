@@ -82,11 +82,14 @@ struct socio {
  
  //variables	
 int menu;
-char rep_final; 
 int opcion;	
+char rep_final; 
 char rep;
-int referencia;
-int psilla;
+
+//devolucion
+int refe;
+
+
 float dinero;
 float num;
 do{
@@ -197,20 +200,34 @@ fflush(stdin);
 printf("\n\n========================================================================================================================\n\n");
 
 }while(rep=='s'||rep=='S');
-   // menu_color();
 
-/*
+//============================================================================================================================================================================================================================================
+
+//ARCHIVO PRECIO TOTAL						
+
+
+
+int i;
+float particulos[6];
+float pmax;
+float pfinal;
+
+particulos[6]=NULL;
+
+//ARCHIVO PTOTAL
 FILE *ptotal;
-ptotal=fopen("ptotal.txt","r");
+		ptotal=fopen("ptotal.txt","r");	
+for(i=0;i<6;i++){
+	
+	fscanf(ptotal,"%d", particulos[i]);
+	pmax+= particulos[i];
+}
+fclose(ptotal);
 
-float pfinal; //precio total
-float pfinalsillas; //precio total sillas
-scanf(ptotal, "%g", &pfinalsillas);
-*/
-
+//ARCHIVOS TICKET
 
 		ticket=fopen("ticket.txt","a");
-
+		
 
 		//Comprobante de que se cree archivo 
 		if(ticket==NULL){
@@ -219,13 +236,73 @@ scanf(ptotal, "%g", &pfinalsillas);
 		else {
 			printf("\n\n Copia del ticket creada");
 		}
+		fprintf(ticket,"\n\n\nSu compra es de %g $", pmax);
 		
+		//codigo de la factura 
+		FILE *referencia;
+		referencia=fopen("referencia","w");
 			srand(time(NULL));
-			referencia=rand () % 10000000000+1;	
-			fprintf(ticket, "\n\n Su código de factura es %i",referencia);
+			refe=rand () % 10000000000+1;	
+			fprintf(referencia, "%i",refe);
+			
+		fprintf(ticket, "Su codigo de factura es %i",refe);	
+	fclose(referencia);		
 	fclose(ticket);
 	
+	
+	printf("SU compra es de %g $", pmax);
+	
+// Descuento por socios (meter en subfuncion)
+char respuesta;
+char rep_descuento	;
+int digitos;
+FILE *codigo;
+int cod;
+
+
+	printf("Es usted socio  ");
+	scanf("%c",&respuesta);
+	fflush(stdin);
+	
+	if(respuesta=='s'|| respuesta=='S'){
+	
+	do{
+		printf("\n Introduce tu codigo de socio, por favor:  ");
+		scanf("%i",&digitos);
+		fflush(stdin);
+					
+	codigo=fopen("codigo","r");	
+	fscanf(codigo,"%i",&cod);
+	
+		if(cod==digitos){
+			
+			fopen("ticket.txt","a");
+			
+			printf("Sete va aplicar un descuento del 20% por ser socio");
+			pfinal=0.8*pmax;
+			printf("Su compra,tras el decuento, tiene un valor de %g $ ", pfinal);
+			fprintf(ticket,"Su compra,tras el decuento, tiene un valor de %g $ ", pfinal);
+			fclose(ticket);
+		}
+		else {
+			printf("Error , desea volver a intentarlo:  ");
+			scanf("%c",&rep_descuento);
+			fflush(stdin);
+			
+		}
+	
+}while(rep_descuento=='s'||rep_descuento=='S');
+	}
+	
+	else{
+		printf("SU compra es de %g $", pmax);	
+		
+	}
+	
 	break;
+	
+	
+	
 	 //Opcion de devolucion
 case 2:	
 
@@ -379,17 +456,19 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 					printf("\n\nSuma total de la compra: %g$", ptotal_sillas);
 					//return 	ptotal_sillas;		
 						
-/*
+
 FILE *ptotal;
 ptotal=fopen("ptotal.txt","a");
-fprint(ptotal, "%g",ptotal_sillas);
+fprintf(ptotal, "\n%g",ptotal_sillas);
 fclose(ptotal);
-*/
 
-			//Archivo
+
+			//Archivo ticket
 			
 			FILE *ticket;
+			FILE *referencia;
 			ticket=fopen("ticket.txt","a");
+			referencia=fopen("referencia","w");
 			
 					for (i=0;i<4;i++){
 						
@@ -444,8 +523,12 @@ fclose(ptotal);
 							
 					}
 					
-				//	printf("%i", ptotal_camas);			
-						
+					printf("\n%i", ptotal_camas);		
+//ARCHIVO PRECIO TOTAL						
+FILE *ptotal;
+ptotal=fopen("ptotal.txt","a");
+fprintf(ptotal, "\n%g",ptotal_camas);
+fclose(ptotal);						
 			//Archivo
 			
 			FILE *ticket;
@@ -495,7 +578,7 @@ do{
 error=0;
 	    for(int i=0;i<3;i++)
    {
-    	printf("\n%d.   -%s (%g)",i+1,mesas[i].tipo_mesa, mesas[i].precio);
+    	printf("\n%d.   -%s (%g$)",i+1,mesas[i].tipo_mesa, mesas[i].precio);
 	}
 	
 	printf("\n\n Qu\202 desea comprar?:  ");
@@ -552,7 +635,7 @@ error=0;
 
 					printf("\n========================================================================================================================\n");
 					printf("\n\nUsted ha comprado:   ");
-					for (i=0;i<4;i++){
+					for (i=0;i<3;i++){
 						
 						if(cantidad_mesas[i]!=0)	{
 							particulo[i]=cantidad_mesas[i]*mesas[i].precio;
@@ -561,7 +644,14 @@ error=0;
 						}		
 					}
 					
-					printf("\n\nSuma total de la compra: %g$", ptotal_mesas);			
+					printf("\n\nSuma total de la compra: %g$", ptotal_mesas);	
+					
+										
+//ARCHIVO PRECIO TOTAL						
+FILE *ptotal;
+ptotal=fopen("ptotal.txt","a");
+fprintf(ptotal, "\n%g",ptotal_mesas);
+fclose(ptotal);			
 						
 			//Archivo
 			
@@ -663,8 +753,13 @@ error=0;
 						}		
 					}
 					
-					printf("\n\nSuma total de la compra: %g$", ptotal_armarios);			
-						
+					printf("\n\nSuma total de la compra: %g$", ptotal_armarios);	
+							
+//ARCHIVO PRECIO TOTAL						
+FILE *ptotal;
+ptotal=fopen("ptotal.txt","a");
+fprintf(ptotal, "\n%g",ptotal_armarios);
+fclose(ptotal);							
 			//Archivo
 			
 			FILE *ticket;
@@ -730,7 +825,7 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 			
 	    default: 
 	    
-			printf("\nError!!! No disponemos de este art\241culo.\n\n \250Desea volver al men\243 de librer\421as? ");
+			printf("\nError!!! No disponemos de este art\241culo.\n\n \250Desea volver al men\243 de librer\241as? ");
 			error++;
 			scanf("%s",&rep);
 			fflush(stdin);
@@ -757,8 +852,13 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 						}		
 					}
 					
-					printf("\n\nSuma total de la compra: %g$", ptotal_librerias);			
-						
+					printf("\n\nSuma total de la compra: %g$", ptotal_librerias);
+								
+//ARCHIVO PRECIO TOTAL						
+FILE *ptotal;
+ptotal=fopen("ptotal.txt","a");
+fprintf(ptotal, "\n%g",ptotal_librerias);
+fclose(ptotal);							
 			//Archivo
 			
 			FILE *ticket;
@@ -837,7 +937,7 @@ error=0;
 			
 	    default: 
 	    
-			printf("\nError!!! No disponemos de este art\241culo.\n\n \250Desea volver al men\243 de sof\420s? ");
+			printf("\nError!!! No disponemos de este art\241culo.\n\n \250Desea volver al men\243 de sof\240s? ");
 			error++;
 			scanf("%s",&rep);
 			fflush(stdin);
@@ -864,7 +964,13 @@ error=0;
 						}		
 					}
 					
-					printf("\n\nSuma total de la compra: %g$", ptotal_sofas);			
+					printf("\n\nSuma total de la compra: %g$", ptotal_sofas);	
+													
+//ARCHIVO PRECIO TOTAL						
+FILE *ptotal;
+ptotal=fopen("ptotal.txt","a");
+fprintf(ptotal, "\n%g",ptotal_sofas);
+fclose(ptotal);			
 						
 			//Archivo
 			
@@ -980,12 +1086,17 @@ i=1;
 		}
 		
 	printf("\nSe generar\240 aleatoriamente su c\242digo de cliente, lo que le permitir\240 gozar de descuentos y ofertas exclusivas:    ");
-		
+	
+	FILE *codigo;
+	codigo=fopen("codigo","w");	
 			
 				srand(time(NULL));
 				socios[i].pin=rand () % 1000+1;	
-				printf("%i",socios[i].pin);		
-		
+				printf("\n%i",socios[i].pin);	
+				
+	//fprintf(codigo,"\n%s","PIN:");
+	fprintf(codigo,"%i",socios[i].pin);	
+	fclose(codigo)	;
 //introduce los datos en un archivo	
 	fprintf(lista_socios,"\t\n%s","LISTA DE SOCIOS");
 	fprintf(lista_socios, "\n\n%s", "SOCIO" );
@@ -1002,8 +1113,7 @@ i=1;
 	fprintf(lista_socios,"%s","  y piso  ");
 	fprintf(lista_socios,"%i",socios[i].piso);
 
-	fprintf(lista_socios,"\n%s","PIN:");
-	fprintf(lista_socios,"%i",socios[i].pin);
+
 	
 	
 	fclose(lista_socios);
