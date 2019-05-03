@@ -6,7 +6,7 @@
 //DECLARACION DE FUNCIONES
 
 //Funcion de articulos 
-void lista_articulos();//muestra los diferentes articulos que aparecen en la página web
+void lista_articulos();//muestra los diferentes articulos que aparecen en la pÃ¡gina web
 struct lista_articulos 
 {
 	char tipos_articulos[20];
@@ -56,6 +56,8 @@ struct lista_color{
 	char tipo_color[20];
 	
 };
+//Funcion devoluciones
+void devoluciones();
 
 //Funcion de Socios
 void registro_socios();
@@ -88,6 +90,14 @@ char rep;
 
 //devolucion
 int refe;
+	 		FILE *referencia;
+		referencia=fopen("referencia","w");
+			srand(time(NULL));
+			refe=rand () % 10000000000+1;	
+			fprintf(referencia, "%i",refe);
+			
+		fprintf(referencia, "es su codigo de referencia");	
+	fclose(referencia);		
 
 
 float dinero;
@@ -239,14 +249,7 @@ fclose(ptotal);
 		fprintf(ticket,"\n\n\nSu compra es de %g $", pmax);
 		
 		//codigo de la factura 
-		FILE *referencia;
-		referencia=fopen("referencia","w");
-			srand(time(NULL));
-			refe=rand () % 10000000000+1;	
-			fprintf(referencia, "%i",refe);
-			
-		fprintf(ticket, "Su codigo de factura es %i",refe);	
-	fclose(referencia);		
+
 	fclose(ticket);
 	
 	
@@ -304,7 +307,11 @@ int cod;
 	
 	
 	 //Opcion de devolucion
-case 2:	
+case 2:
+		
+devoluciones();
+		
+break;
 
 //Opcion de socios
 case 3:	
@@ -340,7 +347,7 @@ rep_final='s';
  //FUNCION ARTICULOS
 
 
-    void lista_articulos(){//muestra los diferentes articulos que aparecen en la página web
+    void lista_articulos(){//muestra los diferentes articulos que aparecen en la pÃ¡gina web
 	struct lista_articulos categorias[6]={		
     {"Sillas"},{"Camas"},{"Mesas"},{"Armarios"},{"Librer\241as"},{"Sof\240s"}};
     
@@ -1034,6 +1041,32 @@ do{
 }
 }while(rep=='s'||rep=='S');
 }
+
+
+// FUNCION DEVOLUCIONES
+void devoluciones(){
+int refe;
+int refe_clientes;
+	FILE *referencia;
+		referencia=fopen("referencia.txt","w+");
+			srand(time(NULL));
+			refe=rand () % 10000000000+1;
+			fprintf(referencia, "%i",refe);
+
+		fprintf(referencia, " es su codigo de referencia");
+	fclose(referencia);
+    printf("Para poder realizar la devolucion debe introducir el codigo de referencia \n");
+	printf("Su codigo de referencia se encuentra en un archivo anexo a su ticket \n");
+	printf("Introduzca el numero de referencia: \n");
+	scanf("%d",&refe_clientes);
+	if(refe_clientes==refe){
+		printf("El codigo de referencia es correcto \n");
+        printf("Tramitaremos su devolucion, \n");
+	}
+	else{
+        printf("Este codigo de referencia no es valido \n");
+	}
+}
  
 
 //FUNCION SOCIOS ===============================================================================================================================================================================================================================
@@ -1058,7 +1091,7 @@ i=1;
 	printf("\nIntroduzca su usuario (no n\243meros):   ");
 	scanf("%30[^\n]", socios[i].correo);
 	fflush(stdin);
-	printf("\nIntroduzca su contraseña (solo n\243meros):   ");
+	printf("\nIntroduzca su contraseÃ±a (solo n\243meros):   ");
 	scanf("%i", &socios[i].password);
 	fflush(stdin);
 	printf("\nIntroduzca su localidad:   ");
@@ -1104,7 +1137,7 @@ i=1;
 	fprintf(lista_socios,"\n\n %s %s ",socios[i].nombre, socios[i].apellido);
 	fprintf(lista_socios,"\n%s","usuario: ");
 	fprintf(lista_socios,"%s",socios[i].correo);
-	fprintf(lista_socios,"\n%s","contraseña: ");
+	fprintf(lista_socios,"\n%s","contraseÃ±a: ");
 	fprintf(lista_socios,"%i",socios[i].password);
 	fprintf(lista_socios,"\n%s","localidad: ");
 	fprintf(lista_socios,"%s",socios[i].ciudad);	
