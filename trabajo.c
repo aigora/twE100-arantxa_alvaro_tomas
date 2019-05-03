@@ -87,19 +87,6 @@ int menu;
 int opcion;	
 char rep_final; 
 char rep;
-
-//devolucion
-int refe;
-	 		FILE *referencia;
-		referencia=fopen("referencia","w");
-			srand(time(NULL));
-			refe=rand () % 10000000000+1;	
-			fprintf(referencia, "%i",refe);
-			
-		fprintf(referencia, "es su codigo de referencia");	
-	fclose(referencia);		
-
-
 float dinero;
 float num;
 do{
