@@ -132,7 +132,7 @@ do{
 			fflush(stdin);
 			
 			
-			switch(opcion){
+			switch(opcion1){
 				case 1: //escritorio
 				printf("\n\n Cuantas mesas de escritorio hay?:	");
 				scanf("%d", &m1.cantidad);
@@ -259,7 +259,7 @@ do{
 			fflush(stdin);
 			
 			
-			switch(opcion){
+			switch(opcion4){
 				case 1: //sofá chester
 				printf("\n\n Cuantos sofas chester hay?:	");
 				scanf("%d", &s1.cantidad);
