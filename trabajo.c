@@ -89,6 +89,7 @@ char rep_final;
 char rep;
 float dinero;
 float num;
+
 do{
 	Beep(261.63, 250);
 	Beep(261.63, 250);
@@ -118,7 +119,11 @@ switch (menu){
 
 //Opcion de compra
 case 1:	
-	do {
+int error;
+
+do{
+	error=0;
+		do {
 		
 		printf(" De cu\240nto dinero dispone(\44)?:  ");
 		scanf("%f", &dinero);
@@ -133,8 +138,24 @@ case 1:
 //Variables 
 int opcion;	
 char rep;
+//Archivo precio total
+FILE *ptotal;
+ptotal=fopen("ptotal.txt","w");
+fclose(ptotal);
 
 
+//archivo referecia 
+int refe;
+int refe_clientes;
+	FILE *referencia;
+		referencia=fopen("referencia.txt","w");
+			srand(time(NULL));
+			refe=rand () % 10000000000+1;
+			fprintf(referencia, "%i",refe);
+
+		fprintf(referencia, " es su codigo de referencia");
+	fclose(referencia);
+	
 		//Archivo
 		FILE *ticket;		
 		ticket=fopen("ticket.txt","w");
@@ -213,11 +234,11 @@ for (i=0;i<6;i++)
 particulos[6]=0;
 
 //ARCHIVO PTOTAL
-FILE *ptotal;
+
 		ptotal=fopen("ptotal.txt","r");	
 for(i=0;i<6;i++){
 	
-	fscanf(ptotal,"%d", &particulos[i]);
+	fscanf(ptotal,"%f", &particulos[i]);
 	pmax+= particulos[i];
 }
 fclose(ptotal);
@@ -269,11 +290,12 @@ int cod;
 			
 			fopen("ticket.txt","a");
 			
-			printf("Sete va aplicar un descuento del 20% por ser socio");
+			printf("\n\nSete va aplicar un descuento del 20(porciento) por ser socio");
 			pfinal=0.8*pmax;
-			printf("Su compra,tras el decuento, tiene un valor de %g $ ", pfinal);
+			printf("\n\nSu compra,tras el decuento, tiene un valor de %g $ ", pfinal);
 			fprintf(ticket,"Su compra,tras el decuento, tiene un valor de %g $ ", pfinal);
 			fclose(ticket);
+			pmax=pfinal;
 		}
 		else {
 			printf("Error , desea volver a intentarlo:  ");
@@ -285,11 +307,25 @@ int cod;
 }while(rep_descuento=='s'||rep_descuento=='S');
 	}
 	
-	else{
-		printf("SU compra es de %g $", pmax);	
+	if(pmax > 0){
+		printf("\n\nSu compra es de %g$", pmax);	
 		
 	}
 	
+	if(dinero <= pmax){
+		
+		error=1;
+		printf("\n\n\nNo tienes dinero suficiente. Volviendo al menu de inico....");
+		printf("\n\n================================================================================================================\n");
+	}
+	else {
+		dinero=dinero -pmax;
+		printf("\n\n La compra se ha realizado satisfactoriamente")	;
+		printf("\n\n\n Dispone de %g", dinero)	;
+			error=0;
+	}
+	
+}while(error==1);
 	break;
 	
 	
@@ -325,7 +361,7 @@ rep_final='s';
 }while(rep_final=='s'||rep_final=='S');
  
  
- 
+ printf("\n\n\n Vuelva pronto");
 
 }
  
@@ -400,7 +436,7 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 							
 							printf("Error! no disponemos de tal cantidad en el almac\202n.");
 						}
-						else{
+						if(cantidad_sillas[0] <= cantmax[0] ) {
 							
 							cant2[0]=cantmax[0]-cantidad_sillas[0];
 						//	cantmax[0]=cant2[0];
@@ -522,18 +558,18 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 					printf("\n\nUsted ha comprado:   ");
 					for (i=0;i<4;i++){
 						
-						if((cantidad_sillas[i]!=0)&&(cantidad_sillas[i]<cantmax[i]))	{
+						if((cantidad_sillas[i]!=0)&&(cantidad_sillas[i]<=cantmax[i]))	{
 							particulo[i]=cantidad_sillas[i]*sillas[i].precio;
 							printf("\n\n%i unidades de %s ....... %g$",cantidad_sillas[i],sillas[i].tipo_silla,particulo[i]);
 							ptotal_sillas+=particulo[i];
 						}		
-					}
-					if (cantidad_sillas[i]<cantmax[i]){
+					}/*
+					if(cantidad_sillas[i]<=cantmax[i]){
 					
 					printf("\n\nSuma total de la compra: %g$", ptotal_sillas);
 					}
 					//return 	ptotal_sillas;		
-						
+						*/
 
 FILE *ptotal;
 ptotal=fopen("ptotal.txt","a");
@@ -544,13 +580,13 @@ fclose(ptotal);
 			//Archivo ticket
 			
 			FILE *ticket;
-			FILE *referencia;
+			
 			ticket=fopen("ticket.txt","a");
-			referencia=fopen("referencia","w");
+			//referencia=fopen("referencia","w");
 			
 					for (i=0;i<4;i++){
 						
-						if(cantidad_sillas[i]!=0)	{
+						if((cantidad_sillas[i]!=0)&&(cantidad_sillas[i]<=cantmax[i]))	{
 							particulo[i]=cantidad_sillas[i]*sillas[i].precio;
 							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_sillas[i],sillas[i].tipo_silla,particulo[i]);
 							
@@ -595,7 +631,8 @@ fclose(ptotal);
 							
 							printf("Error! no disponemos de tal cantidad en el almac\202n.");
 						}
-						else{
+						if((cantidad_camas!=0)&&(cantidad_camas<=cantmax)){
+						
 							
 							cant2=cantmax-cantidad_camas;
 							FILE *almacen_camas;
@@ -614,17 +651,18 @@ fclose(ptotal);
 					printf("\n\nUsted ha comprado:   ");
 					
 						
-						if((cantidad_camas!=0)&&(cantidad_camas<cantmax))	{
+						if((cantidad_camas!=0)&&(cantidad_camas<=cantmax))	{
 							ptotal_camas=	particulo*cantidad_camas;
 							printf("\n\n%i unidades de camas ....... %g$",cantidad_camas,ptotal_camas);
 							
 							
 					}
+					/*
 					if (cantidad_camas<cantmax){
 					
 					printf("\nSuma total de la compra: %g$", ptotal_camas);	
 					}
-				
+				*/
 //ARCHIVO PRECIO TOTAL						
 FILE *ptotal;
 ptotal=fopen("ptotal.txt","a");
@@ -1355,6 +1393,7 @@ do{
 
 // FUNCION DEVOLUCIONES
 void devoluciones(){
+	/*
 int refe;
 int refe_clientes;
 	FILE *referencia;
@@ -1365,6 +1404,14 @@ int refe_clientes;
 
 		fprintf(referencia, " es su codigo de referencia");
 	fclose(referencia);
+	*/
+	
+	int refe;
+int refe_clientes;
+	FILE *referencia;
+	referencia=fopen("referencia.txt","r");
+	fscanf(referencia,"%i",&refe);
+		fclose(referencia);
     printf("Para poder realizar la devolucion debe introducir el codigo de referencia \n");
 	printf("Su codigo de referencia se encuentra en un archivo anexo a su ticket \n");
 	printf("Introduzca el numero de referencia: \n");
