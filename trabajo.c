@@ -209,7 +209,8 @@ float particulos[6];
 float pmax;
 float pfinal;
 
-particulos[6]=NULL;
+for (i=0;i<6;i++)
+particulos[6]=0;
 
 //ARCHIVO PTOTAL
 FILE *ptotal;
@@ -387,7 +388,6 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 						menu_color();
 						
 						printf("\n\nCu\240ntos taburetes desea?: ");
-					
 						scanf("%d",&cantidad_sillas[0]);
 						fflush(stdin);
 						
@@ -669,6 +669,8 @@ void menu_subcategorias_mesas(){//muestra los diferentes tipos de mesas
 							float particulo[3];
 							float ptotal_mesas;
 							int cantidad_mesas [3];
+							int cantmax[3];
+							int cant2[3];
 							int error;
 							char rep;	
 							//vector cantidad =0
@@ -695,6 +697,25 @@ error=0;
 			scanf("%d",&cantidad_mesas [0]);
 			fflush(stdin);
 			
+			FILE *almacen_mescritorio;
+			almacen_mescritorio=fopen("almacen_mescritorio.txt","r");
+			fscanf(almacen_mescritorio, "%i", &cantmax[0]);
+			fclose(almacen_mescritorio);
+						
+			if(cantmax[0] < cantidad_mesas[0]){
+							
+				printf("Error! no disponemos de tal cantidad en el almac\202n.");
+			}
+			else{
+							
+				cant2[0]=cantmax[0]-cantidad_mesas[0];
+			//	cantmax[0]=cant2[0];
+				FILE *almacen_mescritorio;
+				almacen_mescritorio=fopen("almacen_mescritorio.txt","w");
+				fprintf(almacen_mescritorio, "%d", cant2[0]);
+				fclose(almacen_mescritorio);
+							
+			}
 			break;
 			
 		case 2:
@@ -705,6 +726,25 @@ error=0;
 			scanf("%d",&cantidad_mesas [1]);
 			fflush(stdin);
 			
+			FILE *almacen_mcomedor;
+			almacen_mcomedor=fopen("almacen_mcomedor.txt","r");
+			fscanf(almacen_mcomedor, "%i", &cantmax[1]);
+			fclose(almacen_mcomedor);
+						
+			if(cantmax[1] < cantidad_mesas[1]){
+							
+				printf("Error! no disponemos de tal cantidad en el almac\202n.");
+			}
+			else{
+							
+				cant2[1]=cantmax[1]-cantidad_mesas[1];
+			//	cantmax[0]=cant2[0];
+				FILE *almacen_mcomedor;
+				almacen_mcomedor=fopen("almacen_mcomedor.txt","w");
+				fprintf(almacen_mcomedor, "%d", cant2[1]);
+				fclose(almacen_mcomedor);
+							
+			}
 			break;
 			
 		case 3:
@@ -712,8 +752,29 @@ error=0;
 			menu_color();	
 			
 			printf("\n Cu\240ntas mesitas de noche desea? ");
-			scanf("%d",&cantidad_mesas [2]);
+			scanf("%d",&cantidad_mesas [3]);
 			fflush(stdin);
+			
+			FILE *almacen_mnoche;
+			almacen_mnoche=fopen("almacen_mnoche.txt","r");
+			fscanf(almacen_mnoche, "%i", &cantmax[2]);
+			fclose(almacen_mnoche);
+						
+			if(cantmax[2] < cantidad_mesas[2]){
+							
+				printf("Error! no disponemos de tal cantidad en el almac\202n.");
+			}
+			else{
+							
+				cant2[2]=cantmax[2]-cantidad_mesas[2];
+			//	cantmax[0]=cant2[0];
+				FILE *almacen_mnoche;
+				almacen_mnoche=fopen("almacen_mnoche.txt","w");
+				fprintf(almacen_mnoche, "%d", cant2[2]);
+				fclose(almacen_mnoche);
+							
+			}
+			break;
 			
 			
 	    default: 
@@ -738,15 +799,16 @@ error=0;
 					printf("\n\nUsted ha comprado:   ");
 					for (i=0;i<3;i++){
 						
-						if(cantidad_mesas[i]!=0)	{
+						if((cantidad_mesas[i]!=0)&&(cantidad_mesas[i]<cantmax[i]))	{
 							particulo[i]=cantidad_mesas[i]*mesas[i].precio;
 							printf("\n\n%i unidades de %s ....... %g$",cantidad_mesas[i],mesas[i].tipo_mesa,particulo[i]);
 							ptotal_mesas+=particulo[i];
 						}		
 					}
+					if(cantidad_mesas[i]<cantmax[i]) {
 					
 					printf("\n\nSuma total de la compra: %g$", ptotal_mesas);	
-					
+					}
 										
 //ARCHIVO PRECIO TOTAL						
 FILE *ptotal;
@@ -789,6 +851,8 @@ fclose(ptotal);
 							float ptotal_armarios;
 							int cantidad_armarios [2];
 							int error;
+							int cantmax[2];
+							int cant2[2];
 							char rep;	
 							//vector cantidad =0
 							for (i=0;i<2;i++)
@@ -811,7 +875,27 @@ fclose(ptotal);
 						
 			printf("\nCu\240ntos armarios roperos desea? ");
 			scanf("%d",&cantidad_armarios [0]);
-			fflush(stdin);			
+			fflush(stdin);
+			
+			FILE *almacen_ropero;
+			almacen_ropero=fopen("almacen_ropero.txt","r");
+			fscanf(almacen_ropero, "%i", &cantmax[0]);
+			fclose(almacen_ropero);
+						
+			if(cantmax[0] < cantidad_armarios[0]){
+							
+				printf("Error! no disponemos de tal cantidad en el almac\202n.");
+			}
+			else{
+							
+				cant2[0]=cantmax[0]-cantidad_armarios[0];
+			//	cantmax[0]=cant2[0];
+				FILE *almacen_ropero;
+				almacen_ropero=fopen("almacen_ropero.txt","w");
+				fprintf(almacen_ropero, "%d", cant2[0]);
+				fclose(almacen_ropero);
+							
+			}
 			break;
 			
 		case 2:
@@ -821,6 +905,27 @@ fclose(ptotal);
 			printf("\nCu\240ntos armarios de cocina desea? ");			
 			scanf("%d",&cantidad_armarios [1]);
 			fflush(stdin);
+			
+			FILE *almacen_acocina;
+			almacen_acocina=fopen("almacen_acocina.txt","r");
+			fscanf(almacen_acocina, "%i", &cantmax[1]);
+			fclose(almacen_acocina);
+						
+			if(cantmax[1] < cantidad_armarios[1]){
+							
+				printf("Error! no disponemos de tal cantidad en el almac\202n.");
+			}
+			else{
+							
+				cant2[1]=cantmax[1]-cantidad_armarios[1];
+			//	cantmax[0]=cant2[0];
+				FILE *almacen_acocina;
+				almacen_acocina=fopen("almacen_acocina.txt","w");
+				fprintf(almacen_acocina, "%d", cant2[1]);
+				fclose(almacen_acocina);
+							
+			}
+			break;
 			
 	    default: 
 	    
@@ -847,14 +952,16 @@ fclose(ptotal);
 					printf("\n\nUsted ha comprado:   ");
 					for (i=0;i<2;i++){
 						
-						if(cantidad_armarios[i]!=0)	{
+						if((cantidad_armarios[i]!=0)&&(cantidad_armarios[i]<cantmax[i]))	{
 							particulo[i]=cantidad_armarios[i]*armario[i].precio;
 							printf("\n\n%i unidades de %s ....... %g$",cantidad_armarios[i],armario[i].tipo_armario,particulo[i]);
 							ptotal_armarios+=particulo[i];
 						}		
 					}
+					if(cantidad_armarios[i]<cantmax[i]) {
 					
 					printf("\n\nSuma total de la compra: %g$", ptotal_armarios);	
+					}
 							
 //ARCHIVO PRECIO TOTAL						
 FILE *ptotal;
@@ -890,6 +997,8 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 							float particulo[2];
 							float ptotal_librerias;
 							int cantidad_librerias [2];
+							int cantmax[2];
+							int cant2[2];
 							int error;
 							char rep;	
 							//vector cantidad =0
@@ -913,7 +1022,27 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 						
 			printf("Cu\240ntas librer\241as-estante\241as desea? ");
 			scanf("%d",&cantidad_librerias [0]);
-			fflush(stdin);			
+			fflush(stdin);
+			
+			FILE *almacen_estanteria;
+			almacen_estanteria=fopen("almacen_estanteria.txt","r");
+			fscanf(almacen_estanteria, "%i", &cantmax[0]);
+			fclose(almacen_estanteria);
+						
+			if(cantmax[0] < cantidad_librerias[0]){
+							
+				printf("Error! no disponemos de tal cantidad en el almac\202n.");
+			}
+			else{
+							
+				cant2[0]=cantmax[0]-cantidad_librerias[0];
+			//	cantmax[0]=cant2[0];
+				FILE *almacen_estanteria;
+				almacen_estanteria=fopen("almacen_estanteria.txt","w");
+				fprintf(almacen_estanteria, "%d", cant2[0]);
+				fclose(almacen_estanteria);
+							
+			}
 			break;
 			
 		case 2:
@@ -923,6 +1052,27 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 			printf("Cu\240ntas librer\241as Billy desea? ");			
 			scanf("%d",&cantidad_librerias [1]);
 			fflush(stdin);
+			
+			FILE *almacen_billy;
+			almacen_billy=fopen("almacen_billy.txt","r");
+			fscanf(almacen_billy, "%i", &cantmax[1]);
+			fclose(almacen_billy);
+						
+			if(cantmax[1] < cantidad_librerias[1]){
+							
+				printf("Error! no disponemos de tal cantidad en el almac\202n.");
+			}
+			else{
+							
+				cant2[1]=cantmax[1]-cantidad_librerias[1];
+			//	cantmax[0]=cant2[0];
+				FILE *almacen_billy;
+				almacen_billy=fopen("almacen_billy.txt","w");
+				fprintf(almacen_billy, "%d", cant2[1]);
+				fclose(almacen_billy);
+							
+			}
+			break;
 			
 	    default: 
 	    
@@ -946,14 +1096,17 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 					printf("\n\nUsted ha comprado:   ");
 					for (i=0;i<2;i++){
 						
-						if(cantidad_librerias[i]!=0)	{
+						if((cantidad_librerias[i]!=0)&&(cantidad_librerias[i]<cantmax[i]))	{
 							particulo[i]=cantidad_librerias[i]*libreria[i].precio;
 							printf("\n\n%i unidades de %s ....... %g$",cantidad_librerias[i],libreria[i].tipo_libreria,particulo[i]);
 							ptotal_librerias+=particulo[i];
 						}		
 					}
+					if(cantidad_librerias[i]<cantmax[i]) {
 					
 					printf("\n\nSuma total de la compra: %g$", ptotal_librerias);
+					}
+							
 								
 //ARCHIVO PRECIO TOTAL						
 FILE *ptotal;
@@ -990,6 +1143,8 @@ void menu_subcategorias_sofa(){//muestra los diferentes tipos de sofas
 							float particulo[3];
 							float ptotal_sofas;
 							int cantidad_sofas [3];
+							int cantmax[3];
+							int cant2[3];
 							int error;
 							char rep;	
 							//vector cantidad =0
@@ -1015,6 +1170,25 @@ error=0;
 			scanf("%d",&cantidad_sofas [0]);
 			fflush(stdin);
 			
+			FILE *almacen_sofachester;
+			almacen_sofachester=fopen("almacen_sofachester.txt","r");
+			fscanf(almacen_sofachester, "%i", &cantmax[0]);
+			fclose(almacen_sofachester);
+						
+			if(cantmax[0] < cantidad_sofas[0]){
+							
+				printf("Error! no disponemos de tal cantidad en el almac\202n.");
+			}
+			else{
+							
+				cant2[0]=cantmax[0]-cantidad_sofas[0];
+			//	cantmax[0]=cant2[0];
+				FILE *almacen_sofachester;
+				almacen_sofachester=fopen("almacen_sofachester.txt","w");
+				fprintf(almacen_sofachester, "%d", cant2[0]);
+				fclose(almacen_sofachester);
+							
+			}
 			break;
 			
 		case 2:
@@ -1025,6 +1199,25 @@ error=0;
 			scanf("%d",&cantidad_sofas [1]);
 			fflush(stdin);
 			
+			FILE *almacen_sofalounge;
+			almacen_sofalounge=fopen("almacen_sofalounge.txt","r");
+			fscanf(almacen_sofalounge, "%i", &cantmax[1]);
+			fclose(almacen_sofalounge);
+						
+			if(cantmax[1] < cantidad_sofas[1]){
+							
+				printf("Error! no disponemos de tal cantidad en el almac\202n.");
+			}
+			else{
+							
+				cant2[1]=cantmax[1]-cantidad_sofas[1];
+			//	cantmax[0]=cant2[0];
+				FILE *almacen_sofalounge;
+				almacen_sofalounge=fopen("almacen_sofalounge.txt","w");
+				fprintf(almacen_sofalounge, "%d", cant2[1]);
+				fclose(almacen_sofalounge);
+							
+			}
 			break;
 			
 		case 3:
@@ -1035,6 +1228,26 @@ error=0;
 			scanf("%d",&cantidad_sofas [2]);
 			fflush(stdin);
 			
+			FILE *almacen_sofacama;
+			almacen_sofacama=fopen("almacen_sofacama.txt","r");
+			fscanf(almacen_sofacama, "%i", &cantmax[2]);
+			fclose(almacen_sofacama);
+						
+			if(cantmax[2] < cantidad_sofas[2]){
+							
+				printf("Error! no disponemos de tal cantidad en el almac\202n.");
+			}
+			else{
+							
+				cant2[2]=cantmax[2]-cantidad_sofas[2];
+			//	cantmax[0]=cant2[0];
+				FILE *almacen_sofacama;
+				almacen_sofacama=fopen("almacen_sofacama.txt","w");
+				fprintf(almacen_sofacama, "%d", cant2[2]);
+				fclose(almacen_sofacama);
+							
+			}
+			break;
 			
 	    default: 
 	    
@@ -1058,14 +1271,17 @@ error=0;
 					printf("\n\nUsted ha comprado:   ");
 					for (i=0;i<3;i++){
 						
-						if(cantidad_sofas[i]!=0)	{
+						if((cantidad_sofas[i]!=0)&&(cantidad_sofas[i]<cantmax[i]))	{
 							particulo[i]=cantidad_sofas[i]*sofa[i].precio;
 							printf("\n\n%i unidades de %s ....... %g$",cantidad_sofas[i],sofa[i].tipo_sofa,particulo[i]);
 							ptotal_sofas+=particulo[i];
 						}		
 					}
+					if(cantidad_sofas[i]<cantmax[i]){
 					
 					printf("\n\nSuma total de la compra: %g$", ptotal_sofas);	
+					}
+						
 													
 //ARCHIVO PRECIO TOTAL						
 FILE *ptotal;
