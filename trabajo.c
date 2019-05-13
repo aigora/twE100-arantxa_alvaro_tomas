@@ -5,9 +5,9 @@
 
 //DECLARACION DE FUNCIONES
 
-//Funcion de articulos 
-void lista_articulos();//muestra los diferentes articulos que aparecen en la página web
-struct lista_articulos 
+//Funcion de articulos
+void lista_articulos();//muestra los diferentes articulos que aparecen en la pÃ¡gina web
+struct lista_articulos
 {
 	char tipos_articulos[20];
 };
@@ -54,7 +54,7 @@ struct menu_sofa{
 void menu_color();//muestra los colores con los que se pueden fabricar los muebles
 struct lista_color{
 	char tipo_color[20];
-	
+
 };
 //Funcion devoluciones
 void devoluciones();
@@ -67,11 +67,12 @@ struct socio {
 	char correo[30];
 	int password;
 	char ciudad[30];
-	char calle [20]; 
-	int piso;	
+	char calle [20];
+	int piso;
 	int pin;
-	
+
 }socios[100];
+
 
 
 //===========================================================================================================================================================================================================================================
@@ -80,15 +81,17 @@ struct socio {
 //FUNCION MAIN
 
  int main(){
- 
- 
- //variables	
+
+
+ //variables
 int menu;
-int opcion;	
-char rep_final; 
+int opcion;
+char rep_final;
 char rep;
 float dinero;
 float num;
+int error;
+
 
 do{
 	Beep(261.63, 250);
@@ -106,6 +109,9 @@ printf("\n\n\t\t\tTU TIENDA DE MUEBLES AL REV\220S");
 
 
 
+
+
+
 printf("\n\n Diferentes servicios:\n");
 printf("\n 1. Compra\n");
 printf("\n 2. Devoluci\242n(sin programar)\n");
@@ -118,13 +124,13 @@ printf("\n======================================================================
 switch (menu){
 
 //Opcion de compra
-case 1:	
-int error;
+case 1:
+
 
 do{
 	error=0;
 		do {
-		
+
 		printf(" De cu\240nto dinero dispone(\44)?:  ");
 		scanf("%f", &dinero);
 		fflush(stdin);
@@ -134,9 +140,9 @@ do{
 			}
 	} while (num != 1);
 
-	
-//Variables 
-int opcion;	
+
+//Variables
+int opcion;
 char rep;
 //Archivo precio total
 FILE *ptotal;
@@ -144,7 +150,7 @@ ptotal=fopen("ptotal.txt","w");
 fclose(ptotal);
 
 
-//archivo referecia 
+//archivo referecia
 int refe;
 int refe_clientes;
 	FILE *referencia;
@@ -155,9 +161,9 @@ int refe_clientes;
 
 		fprintf(referencia, " es su codigo de referencia");
 	fclose(referencia);
-	
+
 		//Archivo
-		FILE *ticket;		
+		FILE *ticket;
 		ticket=fopen("ticket.txt","w");
 
 		//escritura
@@ -167,14 +173,14 @@ int refe_clientes;
 do	{
 
 
-	
+
 lista_articulos();
 printf("\n\n Qu\202 desea comprar?:  ");
 scanf("%d",&opcion);
 fflush(stdin);
 
 switch(opcion){
-	
+
     case 1:
         printf("Usted ha seleccionado Sillas \n");
         printf("\n\nSeleccione el tipo de silla: \n");
@@ -194,7 +200,7 @@ switch(opcion){
         printf("Usted ha seleccionado Armarios \n");
         printf("\n\nSeleccione el tipo de Armario: \n");
         menu_subcategorias_armario();
-        
+
         break;
     case 5:
         printf("Usted ha seleccionado Librer\241as \n");
@@ -209,7 +215,7 @@ switch(opcion){
 
     default:
 
-		printf("El art\241culo seleccionado no se encuentra en ninguna de nuestras categor\241as. \n");   
+		printf("El art\241culo seleccionado no se encuentra en ninguna de nuestras categor\241as. \n");
 }
 fflush(stdin);
 printf("\n\n Desea comprar algo m\240s?:  ");
@@ -221,7 +227,7 @@ printf("\n\n====================================================================
 
 //============================================================================================================================================================================================================================================
 
-//ARCHIVO PRECIO TOTAL						
+//ARCHIVO PRECIO TOTAL
 
 
 
@@ -235,9 +241,9 @@ particulos[6]=0;
 
 //ARCHIVO PTOTAL
 
-		ptotal=fopen("ptotal.txt","r");	
+		ptotal=fopen("ptotal.txt","r");
 for(i=0;i<6;i++){
-	
+
 	fscanf(ptotal,"%f", &particulos[i]);
 	pmax+= particulos[i];
 }
@@ -246,9 +252,9 @@ fclose(ptotal);
 //ARCHIVOS TICKET
 
 		ticket=fopen("ticket.txt","a");
-		
 
-		//Comprobante de que se cree archivo 
+
+		//Comprobante de que se cree archivo
 		if(ticket==NULL){
 			printf("Error!!!");
 		}
@@ -256,14 +262,14 @@ fclose(ptotal);
 			printf("\n\n Copia del ticket creada");
 		}
 		fprintf(ticket,"\n\n\nSu compra es de %g $", pmax);
-		
-		//codigo de la factura 
+
+		//codigo de la factura
 
 	fclose(ticket);
-	
-	
+
+
 	printf("SU compra es de %g $", pmax);
-	
+
 // Descuento por socios (meter en subfuncion)
 char respuesta;
 char rep_descuento	;
@@ -275,21 +281,21 @@ int cod;
 	printf("Es usted socio  ");
 	scanf("%c",&respuesta);
 	fflush(stdin);
-	
+
 	if(respuesta=='s'|| respuesta=='S'){
-	
+
 	do{
 		printf("\n Introduce tu codigo de socio, por favor:  ");
 		scanf("%i",&digitos);
 		fflush(stdin);
-					
-	codigo=fopen("codigo","r");	
+
+	codigo=fopen("codigo","r");
 	fscanf(codigo,"%i",&cod);
-	
+
 		if(cod==digitos){
-			
+
 			fopen("ticket.txt","a");
-			
+
 			printf("\n\nSete va aplicar un descuento del 20(porciento) por ser socio");
 			pfinal=0.8*pmax;
 			printf("\n\nSu compra,tras el decuento, tiene un valor de %g $ ", pfinal);
@@ -301,19 +307,19 @@ int cod;
 			printf("Error , desea volver a intentarlo:  ");
 			scanf("%c",&rep_descuento);
 			fflush(stdin);
-			
+
 		}
-	
+
 }while(rep_descuento=='s'||rep_descuento=='S');
 	}
-	
+
 	if(pmax > 0){
-		printf("\n\nSu compra es de %g$", pmax);	
-		
+		printf("\n\nSu compra es de %g$", pmax);
+
 	}
-	
+
 	if(dinero <= pmax){
-		
+
 		error=1;
 		printf("\n\n\nNo tienes dinero suficiente. Volviendo al menu de inico....");
 		printf("\n\n================================================================================================================\n");
@@ -324,21 +330,21 @@ int cod;
 		printf("\n\n\n Dispone de %g", dinero)	;
 			error=0;
 	}
-	
+
 }while(error==1);
 	break;
-	
-	
-	
+
+
+
 	 //Opcion de devolucion
 case 2:
-		
+
 devoluciones();
-		
+
 break;
 
 //Opcion de socios
-case 3:	
+case 3:
 
 printf("\n\n Bienvenido al registro de socios \n\n");
 
@@ -350,7 +356,7 @@ default:
 	printf(" Por favor, elija un n\243mero de los planteados en pantalla.\n Se le est\240 redirigiendo al men\243 principal.");
 	printf("\n\n========================================================================================================================\n");
 rep_final='s';
-	break;	
+	break;
 
 }
 
@@ -359,24 +365,24 @@ rep_final='s';
 
 
 }while(rep_final=='s'||rep_final=='S');
- 
- 
+
+
  printf("\n\n\n Vuelva pronto");
 
 }
- 
- 
- 
- 
+
+
+
+
  //FUNCION ARTICULOS
 
 
-    void lista_articulos(){//muestra los diferentes articulos que aparecen en la página web
-	struct lista_articulos categorias[6]={		
+    void lista_articulos(){//muestra los diferentes articulos que aparecen en la pÃ¡gina web
+	struct lista_articulos categorias[6]={
     {"Sillas"},{"Camas"},{"Mesas"},{"Armarios"},{"Librer\241as"},{"Sof\240s"}};
-    
+
     printf("\n\n Las categor\241as que puede encontrar son las siguientes: \n");
-    
+
     for(int i=0;i<6;i++)
     {
     printf("\n %d.   -%s ",i+1,categorias[i].tipos_articulos);
@@ -384,15 +390,15 @@ rep_final='s';
 }
 
 //1 FUNCION ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- SILLAS
-			
-							//estructura	
+
+							//estructura
 void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 
 							struct menu_silla sillas[4]={
 						    {"Taburete",9},{"Silla de jard\241n",25},{"Silla de oficina",69.99},{"Silla de cocina",29.99}};
-						 
-						
-							//variables	
+
+
+							//variables
 							int opcion;
 							int i;
 							float particulo[4];
@@ -401,174 +407,178 @@ void menu_subcategorias_sillas(){//muestra los diferentes tipos de sillas
 							int cantmax[4];
 							int cant2[4];
 							int error;
-							char rep;	
+							char rep;
 							//vector cantidad =0
 							for (i=0;i<4;i++)
 							cantidad_sillas[i]=0;
 							error=0;
-			do{	
-			
+			do{
+
 			   for(int i=0;i<4;i++)
 						    {
 						    	printf("%d.   -%s (%g$) \n",i+1,sillas[i].tipo_silla,sillas[i].precio);
 							}
-							
+
 				printf("\n\n Qu\202 tipo de silla desea?:  ");
 				scanf("%i",&opcion);
 				fflush(stdin);
 
-				
+
 				switch(opcion){
 					case 1:
 						printf("\n\n De qu\202 color desea las sillas?");
 						menu_color();
-						
+						printf(" es el taburete que ha seleccionado");
+
 						printf("\n\nCu\240ntos taburetes desea?: ");
 						scanf("%d",&cantidad_sillas[0]);
 						fflush(stdin);
-						
+
 						FILE *almacen_taburetes;
 						almacen_taburetes=fopen("almacen_taburetes.txt","r");
 						fscanf(almacen_taburetes, "%i", &cantmax[0]);
 						fclose(almacen_taburetes);
-						
+
 						if(cantmax[0] < cantidad_sillas[0]){
-							
+
 							printf("Error! no disponemos de tal cantidad en el almac\202n.");
 						}
 						if(cantidad_sillas[0] <= cantmax[0] ) {
-							
+
 							cant2[0]=cantmax[0]-cantidad_sillas[0];
 						//	cantmax[0]=cant2[0];
 							FILE *almacen_taburetes;
 							almacen_taburetes=fopen("almacen_taburetes.txt","w");
 							fprintf(almacen_taburetes, "%d", cant2[0]);
 							fclose(almacen_taburetes);
-							
+
 						}
 						break;
-						
+
 					case 2:
 						printf("\n\n De qu\202 color desea las sillas?");
 						menu_color();
-						
-						
-						printf("\n\nCu\240ntas sillas de jard\241n desea?: ");								
+						printf(" es el color de la silla de jard\24ln que ha seleccionado");
+
+
+						printf("\n\nCu\240ntas sillas de jard\241n desea?: ");
 						scanf("%d",&cantidad_sillas[1]);
 						fflush(stdin);
-						
+
 						FILE *almacen_sjardin;
 						almacen_sjardin=fopen("almacen_sjardin.txt","r");
 						fscanf(almacen_sjardin, "%i", &cantmax[1]);
 						fclose(almacen_sjardin);
-						
+
 						if(cantmax[1] < cantidad_sillas[1]){
-							
+
 							printf("Error! no disponemos de tal cantidad en el almac\202n.");
 						}
 						else{
-							
+
 							cant2[1]=cantmax[1]-cantidad_sillas[1];
 						//	cantmax[0]=cant2[0];
 							FILE *almacen_sjardin;
 							almacen_sjardin=fopen("almacen_sjardin.txt","w");
 							fprintf(almacen_sjardin, "%d", cant2[1]);
 							fclose(almacen_sjardin);
-							
+
 						}
 						break;
-						
+
 					case 3:
 						printf("\n\n De qu\202 color desea las sillas?");
 						menu_color();
-									
-					
+						printf(" es el color de la silla de oficina que ha seleccionado");
+
+
 						printf("\n\nCu\240ntas sillas de oficina desea?: ");
 						scanf("%d",&cantidad_sillas[2]);
 						fflush(stdin);
-						
+
 						FILE *almacen_soficina;
 						almacen_soficina=fopen("almacen_soficina.txt","r");
 						fscanf(almacen_soficina, "%i", &cantmax[2]);
 						fclose(almacen_soficina);
-						
+
 						if(cantmax[2] < cantidad_sillas[2]){
-							
+
 							printf("Error! no disponemos de tal cantidad en el almac\202n.");
 						}
 						else{
-							
+
 							cant2[2]=cantmax[2]-cantidad_sillas[2];
 						//	cantmax[0]=cant2[0];
 							FILE *almacen_soficina;
 							almacen_soficina=fopen("almacen_soficina.txt","w");
 							fprintf(almacen_soficina, "%d", cant2[2]);
 							fclose(almacen_soficina);
-							
+
 						}
 						break;
-						
+
 					case 4:
 						printf("\n\n De qu\202 color desea las sillas?");
 						menu_color();
-									
+						printf(" es el color de la silla de cocina que ha seleccionado");
+
 						printf("\n\nCu\240ntas sillas de cocina desea?: ");
 						scanf("%d",&cantidad_sillas[3]);
 						fflush(stdin);
-						
+
 						FILE *almacen_scocina;
 						almacen_scocina=fopen("almacen_scocina.txt","r");
 						fscanf(almacen_scocina, "%i", &cantmax[3]);
 						fclose(almacen_scocina);
-						
+
 						if(cantmax[3] < cantidad_sillas[3]){
-							
+
 							printf("Error! no disponemos de tal cantidad en el almac\202n.");
 						}
 						else{
-							
+
 							cant2[3]=cantmax[3]-cantidad_sillas[3];
 						//	cantmax[0]=cant2[0];
 							FILE *almacen_scocina;
 							almacen_scocina=fopen("almacen_scocina.txt","w");
 							fprintf(almacen_scocina, "%d", cant2[3]);
 							fclose(almacen_scocina);
-							
+
 						}
 						break;
-						
-					default: 
+
+					default:
 								printf("\nError!!! No disponemos de este art\241culo.\n\n \250Desea volver al men\243 de sillas? ");
 								error++;
 								scanf("%s",&rep);
 								fflush(stdin);
 									printf("\n\n========================================================================================================================\n\n");
-								break;	
+								break;
 						}
-					if(error==0){	
+					if(error==0){
 					fflush(stdin);
 					printf("\n\n Desea comprar algo m\240s o realizar alguna modificaci\242n (en este caso seleccione el art\241culo e indique la nueva cantidad) ");
 					scanf("%c", &rep);
-					fflush(stdin);	
+					fflush(stdin);
 				}
 				}while(rep=='s'||rep=='S');
-						
-					
+
+
 					printf("\n========================================================================================================================\n");
 					printf("\n\nUsted ha comprado:   ");
 					for (i=0;i<4;i++){
-						
+
 						if((cantidad_sillas[i]!=0)&&(cantidad_sillas[i]<=cantmax[i]))	{
 							particulo[i]=cantidad_sillas[i]*sillas[i].precio;
 							printf("\n\n%i unidades de %s ....... %g$",cantidad_sillas[i],sillas[i].tipo_silla,particulo[i]);
 							ptotal_sillas+=particulo[i];
-						}		
+						}
 					}/*
 					if(cantidad_sillas[i]<=cantmax[i]){
-					
+
 					printf("\n\nSuma total de la compra: %g$", ptotal_sillas);
 					}
-					//return 	ptotal_sillas;		
+					//return 	ptotal_sillas;
 						*/
 
 FILE *ptotal;
@@ -578,119 +588,119 @@ fclose(ptotal);
 
 
 			//Archivo ticket
-			
+
 			FILE *ticket;
-			
+
 			ticket=fopen("ticket.txt","a");
 			//referencia=fopen("referencia","w");
-			
+
 					for (i=0;i<4;i++){
-						
+
 						if((cantidad_sillas[i]!=0)&&(cantidad_sillas[i]<=cantmax[i]))	{
 							particulo[i]=cantidad_sillas[i]*sillas[i].precio;
 							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_sillas[i],sillas[i].tipo_silla,particulo[i]);
-							
-						}		
+
+						}
 					}
-					
-			fclose(ticket);			
-			
-				
+
+			fclose(ticket);
+
+
 }
-		
-		
-		
-		
-		
-//2 FUNCION ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Camas			
+
+
+
+
+
+//2 FUNCION ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Camas
 	void menu_subcategorias_camas(){//muestra los diferentes tipos de camas
-		
-							//variables	
+
+							//variables
 							float particulo;
 							float ptotal_camas;
 							int cantidad_camas ;
-							char rep;	
+							char rep;
 							int cantmax;
 							int cant2;
-							
-							particulo=139.99;							
-		
-		
+
+							particulo=139.99;
+
+
 		do{
-		
+
 		printf("\n\nCu\240ntas camas desea(139.99$ por unidad)? ");
 		scanf("%d",&cantidad_camas) ;
-		fflush(stdin);	
-		
+		fflush(stdin);
+
 		FILE *almacen_camas;
 						almacen_camas=fopen("almacen_camas.txt","r");
 						fscanf(almacen_camas, "%i", &cantmax);
 						fclose(almacen_camas);
-						
+
 						if(cantmax < cantidad_camas){
-							
+
 							printf("Error! no disponemos de tal cantidad en el almac\202n.");
 						}
 						if((cantidad_camas!=0)&&(cantidad_camas<=cantmax)){
-						
-							
+
+
 							cant2=cantmax-cantidad_camas;
 							FILE *almacen_camas;
 							almacen_camas=fopen("almacen_camas.txt","w");
 							fprintf(almacen_camas, "%d", cant2);
 							fclose(almacen_camas);
-							
+
 						}
-		
+
 		printf("\n\nDesea realizar alguna modificaci\242n en la compra?:  ");
 		scanf("%c", &rep);
-		fflush(stdin);			
+		fflush(stdin);
 	}while(rep=='s'||rep=='S');
-	
+
 					printf("\n========================================================================================================================\n");
 					printf("\n\nUsted ha comprado:   ");
-					
-						
+
+
 						if((cantidad_camas!=0)&&(cantidad_camas<=cantmax))	{
 							ptotal_camas=	particulo*cantidad_camas;
 							printf("\n\n%i unidades de camas ....... %g$",cantidad_camas,ptotal_camas);
-							
-							
+
+
 					}
 					/*
 					if (cantidad_camas<cantmax){
-					
-					printf("\nSuma total de la compra: %g$", ptotal_camas);	
+
+					printf("\nSuma total de la compra: %g$", ptotal_camas);
 					}
 				*/
-//ARCHIVO PRECIO TOTAL						
+//ARCHIVO PRECIO TOTAL
 FILE *ptotal;
 ptotal=fopen("ptotal.txt","a");
 fprintf(ptotal, "\n%g",ptotal_camas);
-fclose(ptotal);						
+fclose(ptotal);
 			//Archivo
-			
+
 			FILE *ticket;
 			ticket=fopen("ticket.txt","a");
-			
-				
-						
+
+
+
 						if(cantidad_camas!=0)	{
-							
+
 							fprintf(ticket,"\n\n%i unidades de camas ....... %g$",cantidad_camas,ptotal_camas);
-							
-						}		
-					
-					
-			fclose(ticket);	
+
+						}
+
+
+			fclose(ticket);
 
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 //3 Funcion---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Mesas
 
 void menu_subcategorias_mesas(){//muestra los diferentes tipos de mesas
@@ -700,8 +710,8 @@ void menu_subcategorias_mesas(){//muestra los diferentes tipos de mesas
     {"Mesa de escritorio",95},{"Mesa de comedor",239.99},{"Mesita de noche",49.99}};
 
 
-							
-							//variables	
+
+							//variables
 							int opcion;
 							int i;
 							float particulo[3];
@@ -710,125 +720,127 @@ void menu_subcategorias_mesas(){//muestra los diferentes tipos de mesas
 							int cantmax[3];
 							int cant2[3];
 							int error;
-							char rep;	
+							char rep;
 							//vector cantidad =0
 							for (i=0;i<3;i++)
 							cantidad_mesas[i]=0;
-							error=0;	
-do{	
+							error=0;
+do{
 error=0;
 	    for(int i=0;i<3;i++)
    {
     	printf("\n%d.   -%s (%g$)",i+1,mesas[i].tipo_mesa, mesas[i].precio);
 	}
-	
+
 	printf("\n\n Qu\202 desea comprar?:  ");
 	scanf("%d",&opcion);
 	fflush(stdin);
-	
+
 	switch(opcion){
 		case 1:
-			printf("\n\n De qu\202 color desea las mesitas?");
+			printf("\n\n De qu\202 color desea la mesa de escritorio?");
 			menu_color();
-			
+			printf(" es la mesita que ha seleccionado");
 			printf("\nCu\240ntos mesas de escritorio desea? ");
 			scanf("%d",&cantidad_mesas [0]);
 			fflush(stdin);
-			
+
 			FILE *almacen_mescritorio;
 			almacen_mescritorio=fopen("almacen_mescritorio.txt","r");
 			fscanf(almacen_mescritorio, "%i", &cantmax[0]);
 			fclose(almacen_mescritorio);
-						
+
 			if(cantmax[0] < cantidad_mesas[0]){
-							
+
 				printf("Error! no disponemos de tal cantidad en el almac\202n.");
 			}
 			else{
-							
+
 				cant2[0]=cantmax[0]-cantidad_mesas[0];
 			//	cantmax[0]=cant2[0];
 				FILE *almacen_mescritorio;
 				almacen_mescritorio=fopen("almacen_mescritorio.txt","w");
 				fprintf(almacen_mescritorio, "%d", cant2[0]);
 				fclose(almacen_mescritorio);
-							
+
 			}
 			break;
-			
+
 		case 2:
-			printf("\n\n De qu\202 color desea las mesitas?");
-			menu_color();	
-				
-			printf("\nCu\240ntas mesas de comedor desea? ");			
+			printf("\n\n De qu\202 color desea las mesas de comedor?");
+			menu_color();
+			printf(" es la mesa de comedor que ha seleccionado");
+
+			printf("\nCu\240ntas mesas de comedor desea? ");
 			scanf("%d",&cantidad_mesas [1]);
 			fflush(stdin);
-			
+
 			FILE *almacen_mcomedor;
 			almacen_mcomedor=fopen("almacen_mcomedor.txt","r");
 			fscanf(almacen_mcomedor, "%i", &cantmax[1]);
 			fclose(almacen_mcomedor);
-						
+
 			if(cantmax[1] < cantidad_mesas[1]){
-							
+
 				printf("Error! no disponemos de tal cantidad en el almac\202n.");
 			}
 			else{
-							
+
 				cant2[1]=cantmax[1]-cantidad_mesas[1];
 			//	cantmax[0]=cant2[0];
 				FILE *almacen_mcomedor;
 				almacen_mcomedor=fopen("almacen_mcomedor.txt","w");
 				fprintf(almacen_mcomedor, "%d", cant2[1]);
 				fclose(almacen_mcomedor);
-							
+
 			}
 			break;
-			
+
 		case 3:
-			printf("\n\n De qu\202 color desea las mesitas?");
-			menu_color();	
-			
+			printf("\n\n De qu\202 color desea las mesitas de noche?");
+			menu_color();
+			printf(" es el color de la mesita de noche");
+
 			printf("\n Cu\240ntas mesitas de noche desea? ");
 			scanf("%d",&cantidad_mesas [3]);
 			fflush(stdin);
-			
+
 			FILE *almacen_mnoche;
 			almacen_mnoche=fopen("almacen_mnoche.txt","r");
 			fscanf(almacen_mnoche, "%i", &cantmax[2]);
 			fclose(almacen_mnoche);
-						
+
 			if(cantmax[2] < cantidad_mesas[2]){
-							
+
 				printf("Error! no disponemos de tal cantidad en el almac\202n.");
 			}
 			else{
-							
+
 				cant2[2]=cantmax[2]-cantidad_mesas[2];
 			//	cantmax[0]=cant2[0];
 				FILE *almacen_mnoche;
 				almacen_mnoche=fopen("almacen_mnoche.txt","w");
 				fprintf(almacen_mnoche, "%d", cant2[2]);
 				fclose(almacen_mnoche);
-							
+
 			}
 			break;
-			
-			
-	    default: 
-	    
+
+
+	    default:
+
 			printf("\nError!!! No disponemos de este art\241culo.\n\n \250Desea volver al men\243 de mesas? ");
 			error++;
 			scanf("%s",&rep);
 			fflush(stdin);
 			printf("\n\n========================================================================================================================\n\n");
-			break;	
+			break;
 
-		if(error==0){	
+		if(error==0){
 		fflush(stdin);
 		printf("\n\n Desea comprar algo m\240s o realizar alguna modificaci\242n (en este caso seleccione el art\241culo e indique la nueva cantidad) ");
 		scanf("%c", &rep);
-		fflush(stdin);	
+		fflush(stdin);
 		}
 }
 }while(rep=='s'||rep=='S');
@@ -836,39 +848,39 @@ error=0;
 					printf("\n========================================================================================================================\n");
 					printf("\n\nUsted ha comprado:   ");
 					for (i=0;i<3;i++){
-						
+
 						if((cantidad_mesas[i]!=0)&&(cantidad_mesas[i]<cantmax[i]))	{
 							particulo[i]=cantidad_mesas[i]*mesas[i].precio;
 							printf("\n\n%i unidades de %s ....... %g$",cantidad_mesas[i],mesas[i].tipo_mesa,particulo[i]);
 							ptotal_mesas+=particulo[i];
-						}		
+						}
 					}
 					if(cantidad_mesas[i]<cantmax[i]) {
-					
-					printf("\n\nSuma total de la compra: %g$", ptotal_mesas);	
+
+					printf("\n\nSuma total de la compra: %g$", ptotal_mesas);
 					}
-										
-//ARCHIVO PRECIO TOTAL						
+
+//ARCHIVO PRECIO TOTAL
 FILE *ptotal;
 ptotal=fopen("ptotal.txt","a");
 fprintf(ptotal, "\n%g",ptotal_mesas);
-fclose(ptotal);			
-						
+fclose(ptotal);
+
 			//Archivo
-			
+
 			FILE *ticket;
 			ticket=fopen("ticket.txt","a");
-			
+
 					for (i=0;i<3;i++){
-						
+
 						if(cantidad_mesas[i]!=0)	{
 							particulo[i]=cantidad_mesas[i]*mesas[i].precio;
 							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_mesas[i],mesas[i].tipo_mesa,particulo[i]);
-							
-						}		
+
+						}
 					}
-					
-			fclose(ticket);	
+
+			fclose(ticket);
 }
 
 
@@ -876,13 +888,13 @@ fclose(ptotal);
 
 
     void menu_subcategorias_armario(){//muestra los diferentes tipos de armarios
-    
+
 	struct menu_armario armario[2]={
     {"Armario ropero",159.99},{"Armario de cocina",89.99}};
-    
-    
-    
-							//variables	
+
+
+
+							//variables
 							int opcion;
 							int i;
 							float particulo[2];
@@ -891,13 +903,13 @@ fclose(ptotal);
 							int error;
 							int cantmax[2];
 							int cant2[2];
-							char rep;	
+							char rep;
 							//vector cantidad =0
 							for (i=0;i<2;i++)
 							cantidad_armarios[i]=0;
-							error=0;    
-  do{ 
-  error=0; 
+							error=0;
+  do{
+  error=0;
     for(int i=0;i<2;i++)
     {
     	printf("%d.   -%s(%g$)\n",i+1,armario[i].tipo_armario,armario[i].precio);
@@ -909,118 +921,120 @@ fclose(ptotal);
 	switch(opcion){
 		case 1:
 			printf("\n\n De qu\202 color desea el armario?");
-			menu_color();	
-						
+			menu_color();
+			printf(" es el color del armario que ha seleccionado");
+
 			printf("\nCu\240ntos armarios roperos desea? ");
 			scanf("%d",&cantidad_armarios [0]);
 			fflush(stdin);
-			
+
 			FILE *almacen_ropero;
 			almacen_ropero=fopen("almacen_ropero.txt","r");
 			fscanf(almacen_ropero, "%i", &cantmax[0]);
 			fclose(almacen_ropero);
-						
+
 			if(cantmax[0] < cantidad_armarios[0]){
-							
+
 				printf("Error! no disponemos de tal cantidad en el almac\202n.");
 			}
 			else{
-							
+
 				cant2[0]=cantmax[0]-cantidad_armarios[0];
 			//	cantmax[0]=cant2[0];
 				FILE *almacen_ropero;
 				almacen_ropero=fopen("almacen_ropero.txt","w");
 				fprintf(almacen_ropero, "%d", cant2[0]);
 				fclose(almacen_ropero);
-							
+
 			}
 			break;
-			
+
 		case 2:
 			printf("\n\n De qu\202 color desea el armario?");
-			menu_color();	
-						
-			printf("\nCu\240ntos armarios de cocina desea? ");			
+			menu_color();
+				printf(" es el color del armario que ha seleccionado");
+
+			printf("\nCu\240ntos armarios de cocina desea? ");
 			scanf("%d",&cantidad_armarios [1]);
 			fflush(stdin);
-			
+
 			FILE *almacen_acocina;
 			almacen_acocina=fopen("almacen_acocina.txt","r");
 			fscanf(almacen_acocina, "%i", &cantmax[1]);
 			fclose(almacen_acocina);
-						
+
 			if(cantmax[1] < cantidad_armarios[1]){
-							
+
 				printf("Error! no disponemos de tal cantidad en el almac\202n.");
 			}
 			else{
-							
+
 				cant2[1]=cantmax[1]-cantidad_armarios[1];
 			//	cantmax[0]=cant2[0];
 				FILE *almacen_acocina;
 				almacen_acocina=fopen("almacen_acocina.txt","w");
 				fprintf(almacen_acocina, "%d", cant2[1]);
 				fclose(almacen_acocina);
-							
+
 			}
 			break;
-			
-	    default: 
-	    
+
+	    default:
+
 			printf("\nError!!! No disponemos de este art\241culo.\n\n \250Desea volver al men\243 de armarios? ");
 			error++;
 			scanf("%s",&rep);
 			fflush(stdin);
 			printf("\n\n========================================================================================================================\n\n");
-			break;	
+			break;
 
-		if(error==0){	
+		if(error==0){
 		fflush(stdin);
 		printf("\n\n Desea comprar algo m\240s o realizar alguna modificaci\242n (en este caso seleccione el art\241culo e indique la nueva cantidad) ");
 		scanf("%c", &rep);
-		fflush(stdin);	
-		}		
-			
-			
-				
+		fflush(stdin);
+		}
+
+
+
 }
 }while(rep=='s'||rep=='S');
 
 					printf("\n========================================================================================================================\n");
 					printf("\n\nUsted ha comprado:   ");
 					for (i=0;i<2;i++){
-						
+
 						if((cantidad_armarios[i]!=0)&&(cantidad_armarios[i]<cantmax[i]))	{
 							particulo[i]=cantidad_armarios[i]*armario[i].precio;
 							printf("\n\n%i unidades de %s ....... %g$",cantidad_armarios[i],armario[i].tipo_armario,particulo[i]);
 							ptotal_armarios+=particulo[i];
-						}		
+						}
 					}
 					if(cantidad_armarios[i]<cantmax[i]) {
-					
-					printf("\n\nSuma total de la compra: %g$", ptotal_armarios);	
+
+					printf("\n\nSuma total de la compra: %g$", ptotal_armarios);
 					}
-							
-//ARCHIVO PRECIO TOTAL						
+
+//ARCHIVO PRECIO TOTAL
 FILE *ptotal;
 ptotal=fopen("ptotal.txt","a");
 fprintf(ptotal, "\n%g",ptotal_armarios);
-fclose(ptotal);							
+fclose(ptotal);
 			//Archivo
-			
+
 			FILE *ticket;
 			ticket=fopen("ticket.txt","a");
-			
+
 					for (i=0;i<2;i++){
-						
+
 						if(cantidad_armarios[i]!=0)	{
 							particulo[i]=cantidad_armarios[i]*armario[i].precio;
 							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_armarios[i],armario[i].tipo_armario,particulo[i]);
-							
-						}		
+
+						}
 					}
-					
-			fclose(ticket);	
+
+			fclose(ticket);
 }
 
 //5 Funcion---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------librerias
@@ -1028,8 +1042,8 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 
 	struct menu_libreria libreria[2]={
     {"Librer\241-estanter\241a", 79.99},{"Librer\241a Billy", 59.99}};
-    
-							//variables	
+
+							//variables
 							int opcion;
 							int i;
 							float particulo[2];
@@ -1038,13 +1052,13 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 							int cantmax[2];
 							int cant2[2];
 							int error;
-							char rep;	
+							char rep;
 							//vector cantidad =0
 							for (i=0;i<2;i++)
 							cantidad_librerias[i]=0;
-							error=0;  
+							error=0;
  do{
- error=0;   
+ error=0;
     for(int i=0;i<2;i++)
     {
     	printf("\n%d.   -%s(%g$)",i+1,libreria[i].tipo_libreria,libreria[i].precio);
@@ -1052,120 +1066,123 @@ void menu_subcategorias_libreria(){//muestra los diferentes tipos de librerias
 	printf("\n\nQu\202 desea?:   ");
 	scanf("%d",&opcion);
 	fflush(stdin);
-	
+
 	switch(opcion){
 		case 1:
 			printf("\n\n De qu\202 color desea las librer\241as?");
-			menu_color();	
-						
+			menu_color();
+				printf(" es el color de la libreria que ha seleccionado");
+
 			printf("Cu\240ntas librer\241as-estante\241as desea? ");
 			scanf("%d",&cantidad_librerias [0]);
 			fflush(stdin);
-			
+
 			FILE *almacen_estanteria;
 			almacen_estanteria=fopen("almacen_estanteria.txt","r");
 			fscanf(almacen_estanteria, "%i", &cantmax[0]);
 			fclose(almacen_estanteria);
-						
+
 			if(cantmax[0] < cantidad_librerias[0]){
-							
+
 				printf("Error! no disponemos de tal cantidad en el almac\202n.");
 			}
 			else{
-							
+
 				cant2[0]=cantmax[0]-cantidad_librerias[0];
 			//	cantmax[0]=cant2[0];
 				FILE *almacen_estanteria;
 				almacen_estanteria=fopen("almacen_estanteria.txt","w");
 				fprintf(almacen_estanteria, "%d", cant2[0]);
 				fclose(almacen_estanteria);
-							
+
 			}
 			break;
-			
+
 		case 2:
 			printf("\n\n De qu\202 color desea las librer\241as?");
-			menu_color();	
-						
-			printf("Cu\240ntas librer\241as Billy desea? ");			
+			menu_color();
+			printf(" es el color de la libreria que ha seleccionado");
+
+
+			printf("Cu\240ntas librer\241as Billy desea? ");
 			scanf("%d",&cantidad_librerias [1]);
 			fflush(stdin);
-			
+
 			FILE *almacen_billy;
 			almacen_billy=fopen("almacen_billy.txt","r");
 			fscanf(almacen_billy, "%i", &cantmax[1]);
 			fclose(almacen_billy);
-						
+
 			if(cantmax[1] < cantidad_librerias[1]){
-							
+
 				printf("Error! no disponemos de tal cantidad en el almac\202n.");
 			}
 			else{
-							
+
 				cant2[1]=cantmax[1]-cantidad_librerias[1];
 			//	cantmax[0]=cant2[0];
 				FILE *almacen_billy;
 				almacen_billy=fopen("almacen_billy.txt","w");
 				fprintf(almacen_billy, "%d", cant2[1]);
 				fclose(almacen_billy);
-							
+
 			}
 			break;
-			
-	    default: 
-	    
+
+	    default:
+
 			printf("\nError!!! No disponemos de este art\241culo.\n\n \250Desea volver al men\243 de librer\241as? ");
 			error++;
 			scanf("%s",&rep);
 			fflush(stdin);
 			printf("\n\n========================================================================================================================\n\n");
-			break;	
+			break;
 
-		if(error==0){	
+		if(error==0){
 		fflush(stdin);
 		printf("\n\n Desea comprar algo m\240s o realizar alguna modificaci\242n (en este caso seleccione el art\241culo e indique la nueva cantidad) ");
 		scanf("%c", &rep);
-		fflush(stdin);	
-		}		
+		fflush(stdin);
+		}
 }
 }while(rep=='s'||rep=='S');
 
 					printf("\n========================================================================================================================\n");
 					printf("\n\nUsted ha comprado:   ");
 					for (i=0;i<2;i++){
-						
+
 						if((cantidad_librerias[i]!=0)&&(cantidad_librerias[i]<cantmax[i]))	{
 							particulo[i]=cantidad_librerias[i]*libreria[i].precio;
 							printf("\n\n%i unidades de %s ....... %g$",cantidad_librerias[i],libreria[i].tipo_libreria,particulo[i]);
 							ptotal_librerias+=particulo[i];
-						}		
+						}
 					}
 					if(cantidad_librerias[i]<cantmax[i]) {
-					
+
 					printf("\n\nSuma total de la compra: %g$", ptotal_librerias);
 					}
-							
-								
-//ARCHIVO PRECIO TOTAL						
+
+
+//ARCHIVO PRECIO TOTAL
 FILE *ptotal;
 ptotal=fopen("ptotal.txt","a");
 fprintf(ptotal, "\n%g",ptotal_librerias);
-fclose(ptotal);							
+fclose(ptotal);
 			//Archivo
-			
+
 			FILE *ticket;
 			ticket=fopen("ticket.txt","a");
-			
+
 					for (i=0;i<2;i++){
-						
+
 						if(cantidad_librerias[i]!=0)	{
 							particulo[i]=cantidad_librerias[i]*libreria[i].precio;
 							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_librerias[i],libreria[i].tipo_libreria,particulo[i]);
-							
-						}		
+
+						}
 					}
-					
-			fclose(ticket);	
+
+			fclose(ticket);
 }
 
 //6 Funcion---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Sofa
@@ -1173,9 +1190,9 @@ void menu_subcategorias_sofa(){//muestra los diferentes tipos de sofas
 
 	struct menu_sofa sofa[3]={
     {"Sof\240 Chester",399.99},{"Sof\240 Longue",279.99},{"Sof\240 cama",345}};
-    
-    
-    							//variables	
+
+
+    							//variables
 							int opcion;
 							int i;
 							float particulo[3];
@@ -1184,13 +1201,13 @@ void menu_subcategorias_sofa(){//muestra los diferentes tipos de sofas
 							int cantmax[3];
 							int cant2[3];
 							int error;
-							char rep;	
+							char rep;
 							//vector cantidad =0
 							for (i=0;i<3;i++)
 							cantidad_sofas[i]=0;
 							error=0;
 do{
-error=0;							
+error=0;
     for(int i=0;i<3;i++)
     {
     	printf("\n%d.   -%s (%g$)",i+1,sofa[i].tipo_sofa,sofa[i].precio);
@@ -1198,109 +1215,113 @@ error=0;
 		printf("\n\n Qu\202 desea?:  ");
 		scanf("%d",&opcion);
 		fflush(stdin);
-		
+
 	switch(opcion){
 		case 1:
 			printf("\n\n De qu\202 color desea las sof\240s?");
 			menu_color();
-			
+			printf(" es el color del sofa que ha seleccionado");
+
+
 			printf("\nCu\240ntos sof\240s Chester desea? ");
 			scanf("%d",&cantidad_sofas [0]);
 			fflush(stdin);
-			
+
 			FILE *almacen_sofachester;
 			almacen_sofachester=fopen("almacen_sofachester.txt","r");
 			fscanf(almacen_sofachester, "%i", &cantmax[0]);
 			fclose(almacen_sofachester);
-						
+
 			if(cantmax[0] < cantidad_sofas[0]){
-							
+
 				printf("Error! no disponemos de tal cantidad en el almac\202n.");
 			}
 			else{
-							
+
 				cant2[0]=cantmax[0]-cantidad_sofas[0];
 			//	cantmax[0]=cant2[0];
 				FILE *almacen_sofachester;
 				almacen_sofachester=fopen("almacen_sofachester.txt","w");
 				fprintf(almacen_sofachester, "%d", cant2[0]);
 				fclose(almacen_sofachester);
-							
+
 			}
 			break;
-			
+
 		case 2:
 			printf("\n\n De qu\202 color desea los sof\240s?");
-			menu_color();	
-				
-			printf("\nCu\240ntos sof\240s Lounge desea? ");			
+			menu_color();
+			printf(" es el color del sofa que ha seleccionado");
+
+			printf("\nCu\240ntos sof\240s Lounge desea? ");
 			scanf("%d",&cantidad_sofas [1]);
 			fflush(stdin);
-			
+
 			FILE *almacen_sofalounge;
 			almacen_sofalounge=fopen("almacen_sofalounge.txt","r");
 			fscanf(almacen_sofalounge, "%i", &cantmax[1]);
 			fclose(almacen_sofalounge);
-						
+
 			if(cantmax[1] < cantidad_sofas[1]){
-							
+
 				printf("Error! no disponemos de tal cantidad en el almac\202n.");
 			}
 			else{
-							
+
 				cant2[1]=cantmax[1]-cantidad_sofas[1];
 			//	cantmax[0]=cant2[0];
 				FILE *almacen_sofalounge;
 				almacen_sofalounge=fopen("almacen_sofalounge.txt","w");
 				fprintf(almacen_sofalounge, "%d", cant2[1]);
 				fclose(almacen_sofalounge);
-							
+
 			}
 			break;
-			
+
 		case 3:
 			printf("\n\n De qu\202 color desea los sof\240s");
-			menu_color();	
-			
+			menu_color();
+			printf("es el color del sofa que ha seleccionado");
+
 			printf("\n Cu\240ntos sof\240s cama desea? ");
 			scanf("%d",&cantidad_sofas [2]);
 			fflush(stdin);
-			
+
 			FILE *almacen_sofacama;
 			almacen_sofacama=fopen("almacen_sofacama.txt","r");
 			fscanf(almacen_sofacama, "%i", &cantmax[2]);
 			fclose(almacen_sofacama);
-						
+
 			if(cantmax[2] < cantidad_sofas[2]){
-							
+
 				printf("Error! no disponemos de tal cantidad en el almac\202n.");
 			}
 			else{
-							
+
 				cant2[2]=cantmax[2]-cantidad_sofas[2];
 			//	cantmax[0]=cant2[0];
 				FILE *almacen_sofacama;
 				almacen_sofacama=fopen("almacen_sofacama.txt","w");
 				fprintf(almacen_sofacama, "%d", cant2[2]);
 				fclose(almacen_sofacama);
-							
+
 			}
 			break;
-			
-	    default: 
-	    
+
+	    default:
+
 			printf("\nError!!! No disponemos de este art\241culo.\n\n \250Desea volver al men\243 de sof\240s? ");
 			error++;
 			scanf("%s",&rep);
 			fflush(stdin);
 			printf("\n\n========================================================================================================================\n\n");
-			break;	
+			break;
 
-		if(error==0){	
+		if(error==0){
 		fflush(stdin);
 		printf("\n\n Desea comprar algo m\240s o realizar alguna modificaci\242n (en este caso seleccione el art\241culo e indique la nueva cantidad) ");
 		scanf("%c", &rep);
-		fflush(stdin);	
+		fflush(stdin);
 		}
 }
 }while(rep=='s'||rep=='S');
@@ -1308,40 +1329,40 @@ error=0;
 					printf("\n========================================================================================================================\n");
 					printf("\n\nUsted ha comprado:   ");
 					for (i=0;i<3;i++){
-						
+
 						if((cantidad_sofas[i]!=0)&&(cantidad_sofas[i]<cantmax[i]))	{
 							particulo[i]=cantidad_sofas[i]*sofa[i].precio;
 							printf("\n\n%i unidades de %s ....... %g$",cantidad_sofas[i],sofa[i].tipo_sofa,particulo[i]);
 							ptotal_sofas+=particulo[i];
-						}		
+						}
 					}
 					if(cantidad_sofas[i]<cantmax[i]){
-					
-					printf("\n\nSuma total de la compra: %g$", ptotal_sofas);	
+
+					printf("\n\nSuma total de la compra: %g$", ptotal_sofas);
 					}
-						
-													
-//ARCHIVO PRECIO TOTAL						
+
+
+//ARCHIVO PRECIO TOTAL
 FILE *ptotal;
 ptotal=fopen("ptotal.txt","a");
 fprintf(ptotal, "\n%g",ptotal_sofas);
-fclose(ptotal);			
-						
+fclose(ptotal);
+
 			//Archivo
-			
+
 			FILE *ticket;
 			ticket=fopen("ticket.txt","a");
-			
+
 					for (i=0;i<3;i++){
-						
+
 						if(cantidad_sofas[i]!=0)	{
 							particulo[i]=cantidad_sofas[i]*sofa[i].precio;
 							fprintf(ticket,"\n\n%i unidades de %s ....... %g$",cantidad_sofas[i],sofa[i].tipo_sofa,particulo[i]);
-							
-						}		
+
+						}
 					}
-					
-			fclose(ticket);	
+
+			fclose(ticket);
 }
 
 
@@ -1353,39 +1374,39 @@ void menu_color(){//muestra los colores con los que se pueden fabricar los muebl
 	{"Negro"},{"Teka"},{"Blanco"}};
 	int opcion;
 	char rep;
-	
-do{	
+
+do{
 	rep='n';
 	printf("\nElija uno de los siguientes colores: \n");
 	for(int i=0;i<3;i++)
 	{
-	printf("%d-   %s \n",i+1,color[i].tipo_color);	
+	printf("%d-   %s \n",i+1,color[i].tipo_color);
 	}
-	
+
 	printf("\n\n Cu\240l desea?: ");
 	scanf("%d",&opcion);
 	fflush(stdin);
 	switch(opcion){
-		
+
 		case 1:
-		printf("Usted ha seleccionado el color negro \n");
+		printf("Negro");
 		break;
-		
+
 		case 2:
-		printf("Usted ha seleccionado el color teka \n");
+		printf("Teka");
 		break;
-		
+
 		case 3:
-		printf("Usted ha seleccionado el color blanco \n");
+		printf("Blanco");
         break;
-        
+
         default:
         printf("Este color no se encuentra disponible. Elija uno de los ofrecidos \n");
  		fflush(stdin);
  		rep='s';
 		printf("\n\n========================================================================================================================\n\n");
-		break;	
-       
+		break;
+
 }
 }while(rep=='s'||rep=='S');
 }
@@ -1401,13 +1422,12 @@ int refe_clientes;
 			srand(time(NULL));
 			refe=rand () % 10000000000+1;
 			fprintf(referencia, "%i",refe);
-
 		fprintf(referencia, " es su codigo de referencia");
 	fclose(referencia);
 	*/
-	
+
 	int refe;
-int refe_clientes;
+    int refe_clientes;
 	FILE *referencia;
 	referencia=fopen("referencia.txt","r");
 	fscanf(referencia,"%i",&refe);
@@ -1424,20 +1444,20 @@ int refe_clientes;
         printf("Este codigo de referencia no es valido \n");
 	}
 }
- 
+
 
 //FUNCION SOCIOS ===============================================================================================================================================================================================================================
- 
- 
+
+
  void registro_socios(){
 
 //variables
 int i;
 char rep;
-	
+
 i=1;
- do{	
- //digitalizamos los datos del nuevo socio	
+ do{
+ //digitalizamos los datos del nuevo socio
 	printf("\n\t REGISTRO DE SOCIOS");
 	printf("\n\n Digitalice su nombre:  ");
 	scanf("%30[^\n]", socios[i].nombre);
@@ -1448,7 +1468,7 @@ i=1;
 	printf("\nIntroduzca su usuario (no n\243meros):   ");
 	scanf("%30[^\n]", socios[i].correo);
 	fflush(stdin);
-	printf("\nIntroduzca su contraseña (solo n\243meros):   ");
+	printf("\nIntroduzca su contraseÃ±a (solo n\243meros):   ");
 	scanf("%i", &socios[i].password);
 	fflush(stdin);
 	printf("\nIntroduzca su localidad:   ");
@@ -1459,63 +1479,61 @@ i=1;
 	fflush(stdin);
 	printf("\nIntroduzca el piso:   ");
 	scanf("%i", &socios[i].piso);
-	fflush(stdin);	
- 	
- 	
+	fflush(stdin);
+
+
 //Abrimos archivo
 
  		FILE *lista_socios;
 	lista_socios=fopen("Socios.txt","a");
-	
-		//Comprobante de que se cree archivo 
+
+		//Comprobante de que se cree archivo
 		if(lista_socios==NULL){
 			printf("Error!!!");
 		}
 		else {
 			printf("\n\nUsted se ha registrado con \202xito");
 		}
-		
+
 	printf("\nSe generar\240 aleatoriamente su c\242digo de cliente, lo que le permitir\240 gozar de descuentos y ofertas exclusivas:    ");
-	
+
 	FILE *codigo;
-	codigo=fopen("codigo","w");	
-			
+	codigo=fopen("codigo","w");
+
 				srand(time(NULL));
-				socios[i].pin=rand () % 1000+1;	
-				printf("\n%i",socios[i].pin);	
-				
+				socios[i].pin=rand () % 1000+1;
+				printf("\n%i",socios[i].pin);
+
 	//fprintf(codigo,"\n%s","PIN:");
-	fprintf(codigo,"%i",socios[i].pin);	
+	fprintf(codigo,"%i",socios[i].pin);
 	fclose(codigo)	;
-//introduce los datos en un archivo	
+//introduce los datos en un archivo
 	fprintf(lista_socios,"\t\n%s","LISTA DE SOCIOS");
 	fprintf(lista_socios, "\n\n%s", "SOCIO" );
 	//fprintf(lista_socios, "%i\n", i);
 	fprintf(lista_socios,"\n\n %s %s ",socios[i].nombre, socios[i].apellido);
 	fprintf(lista_socios,"\n%s","usuario: ");
 	fprintf(lista_socios,"%s",socios[i].correo);
-	fprintf(lista_socios,"\n%s","contraseña: ");
+	fprintf(lista_socios,"\n%s","contraseÃ±a: ");
 	fprintf(lista_socios,"%i",socios[i].password);
 	fprintf(lista_socios,"\n%s","localidad: ");
-	fprintf(lista_socios,"%s",socios[i].ciudad);	
+	fprintf(lista_socios,"%s",socios[i].ciudad);
 	fprintf(lista_socios,"\n%s","Domicilio en la calle ");
 	fprintf(lista_socios,"%s",socios[i].calle);
 	fprintf(lista_socios,"%s","  y piso  ");
 	fprintf(lista_socios,"%i",socios[i].piso);
 
 
-	
-	
+
+
 	fclose(lista_socios);
 	printf("\n\nRegistro realizado con \202xito, disfrute de las compras");
-	
+
 	printf("\n\nDesea realizar otro registro de socio?:  ");
 	fflush(stdin);
 	scanf("%c",&rep);
 	fflush(stdin);
 	i++;
-	printf("========================================================================================");		
- 	
+	printf("========================================================================================");
+
 }while(rep=='s'||rep=='S');
- 	
-}
