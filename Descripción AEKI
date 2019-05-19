@@ -1,0 +1,46 @@
+                                        Simulador de tienda de muebles online.
+
+Utilizando una web online cualquiera de venta de productos a modo de
+referencia y con el animo de facilitar al usuario su día a día en lo que a las
+compras se refiere, hemos desarrollado un código con el afán de simular
+una tienda de muebles con el nombre de “AEKI” en la que podemos
+encontrar una extensa variedad de servicios y productos, desde por
+ejemplo compras y devoluciones hablando de servicios y diversas
+categorías de muebles variando su funcionabilidad, color y características.
+
+En lo que se refiere a las opciones que te da nuestra tienda online de
+muebles, podríamos hablar de las siguientes.
+
+1)-Compra:
+-En esta opción damos al usuario/cliente de la tienda el servicio de poder
+elegir el producto que deseé, desde varios tipos de sillas, camas, librerías,
+sofás y mesas; Todos los productos son manufacturados por nuestros
+expertos carpinteros y tapiceros, además de poder elegir el tipo de
+mueble, el cliente podrá elegir el color dentro de la gama de colores en la
+que trabaja nuestra firma. A continuación, se le preguntará si desea
+comprar algo mas o realizar algún cambio en su elección y una vez
+confirmado todo esto, se confirmará la compra y se tramitará el pago y el
+recibo.
+
+2)-Devoluciones:
+En el caso de que el cliente no esté satisfecho con el producto por
+cualquier motivo, ya bien sea personal o de garantía, se le dará al cliente
+la oportunidad de devolver el producto, de tal modo que tendrá que
+introducir el numero de referencia de la venta que quiere devolver (dicho
+número aparecerá en el propio ticket) y nosotros nos encargaremos de
+tramitar su devolución lo antes posible.
+
+3-Registro de socios:
+En este servicio el cliente potencial deberá registrarse para poder realizar
+la compra, asignando una dirección para el envío, el usuario introducirá
+sus datos de identificación y a continuación la dirección de su domicilio.
+Además, al ser socio de nuestra firma de muebles optará a un descuento
+solo por el hecho de serlo, se genera un código de descuento asignado a
+cada socio que al realizar la compra el cliente deberá introducir en el caso
+de que quiera que se le aplique ese descuento.
+
+Añadir que tanto el listado de socios, como el stock del almacén y el ticket,
+se mostrarán en documentos .txt, que aparecerán anexos al trabajo en la
+misma carpeta. Por otra parte, el código que gestiona el almacén esta
+escrito en un archivo .cpp aparte del archivo del programa principal, pero
+ambos están conectados formando parte del mismo programa.
